@@ -1,0 +1,15 @@
+{
+  "name": "newheritage",
+  "version": "1.0.0",
+  "description": "new heritigage portfolio project",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "tmp"
+  },
+  "author": "Hunter Williams",
+  "license": "ISC"
+}
