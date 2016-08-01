@@ -1,0 +1,50 @@
+#selector_button {
+	background: none;
+	color: #FFF;
+	font-size: 1em;
+	border: 0;
+	cursor: pointer;
+	padding: 0;
+	margin: 0;
+				
+&:focus{
+	outline: none;	
+}
+				
+&:before{
+	content: '\25BC';
+	margin-right: 10px;
+}				
+}
+
+#selector{
+	background: #FFF;
+	position: fixed;
+	top: 0; 
+	z-index: 100;
+
+	> .wrapper {
+		margin: 0 10px;
+		position: absolute;
+	}
+		canvas{
+			display: block;
+		}
+		
+		.canvas-color{
+			position: absolute;
+			opacity: 0; 
+		}	
+		
+		.option{
+			position: relative;
+			cursor: pointer;
+			margin-bottom: 10px;
+		}
+		
+		.option:hover .canvas-color{
+			opacity: 1; 
+		}
+
+}
+	

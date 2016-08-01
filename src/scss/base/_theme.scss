@@ -1,0 +1,30 @@
+body {
+	background: $orange;
+	color: $white;
+	overflow: hidden;
+}
+
+/* =========== IMAGES ============= */
+
+img {
+	
+	&.autosize {
+		max-width: 100%;
+		height: auto;
+	}	
+	
+}
+
+/* =========== ELEMENTS ============= */
+
+#backcanvas {
+	position: absolute;
+	opacity: .15;
+}
+
+
+/* =========== HEADERS ============= */
+
+h1 {
+	margin: 0 0 1em 0;
+}

@@ -1,0 +1,56 @@
+#content {
+	
+	> .wrapper {
+		position: relative; 
+		z-index:10;
+	}	
+}
+
+header,
+nav,
+main,
+footer {
+	
+		> .wrapper{
+			 margin: 0 6em;
+		}			
+}	
+
+header {
+	margin-bottom: 2em;
+	
+	> .wrapper{
+		display: flex;
+		flex-flow: row nowrap;
+		align-items: center;
+		height: 125px;
+	
+		div {
+		
+		&.logo{
+			flex: 1 1 auto;
+		}
+		&.dropdown{
+			flex: 0 0 35%;
+			text-align: left;
+		}
+		}
+	}
+}
+
+nav {
+	margin-bottom: 2em;
+}
+
+main {
+	.content {
+		width: 60%;
+	
+	&.people,
+	&.projects,
+	&.contact {
+		display: none;
+	}
+	}
+}
+

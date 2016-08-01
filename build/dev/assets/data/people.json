@@ -1,0 +1,30 @@
+{
+"people": {
+	"person": [{
+			"name": "Mary Waterson",
+			"title": "Lead Designer",
+			"summary": "Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et.",
+			"image": "img/people/waterson/1100x733.jpg"
+			} , {
+			"name": "Mac Williams",
+			"title": "Liason",
+			"summary": "Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et.",
+			"image": "img/people/williams/1100x733.jpg"
+			} , {
+			"name": "Bill Clarkson",
+			"title": "Project Manager",
+			"summary": "Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et.",
+			"image": "img/people/clarkson/900x598.jpg"
+			} , {
+			"name": "Melinda Scott",
+			"title": "Project Manager",
+			"summary": "Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et.",
+			"image": "img/people/scott/1174x781.jpg"
+			} ,  {
+			"name": "Jim O’Brien",
+			"title": "Historical Reference",
+			"summary": "Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et.",
+			"image": "img/people/obrien/1000x667.jpg"
+			}]
+		}
+}

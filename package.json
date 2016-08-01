@@ -8,8 +8,25 @@
   },
   "repository": {
     "type": "git",
-    "url": "tmp"
+    "url": "https://github.com/sitekick/newheritage.git"
   },
   "author": "Hunter Williams",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "bower": "^1.7.9",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-babel": "^6.1.2",
+    "gulp-cached": "^1.1.0",
+    "gulp-changed": "^1.3.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-filter": "^4.0.0",
+    "gulp-inject": "^4.1.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-ruby-sass": "^2.0.6",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-util": "^3.0.7",
+    "require-dir": "^0.3.0",
+    "run-sequence": "^1.2.2",
+    "wiredep": "^4.0.0"
+  }
 }

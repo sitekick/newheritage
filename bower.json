@@ -1,0 +1,21 @@
+{
+  "name": "newheritage",
+  "description": "new heritigage portfolio project",
+  "main": "index.html",
+  "authors": [
+    "Hunter Williams"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/sitekick/newheritage",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "1.12.0",
+    "owl": "^1.3.2"
+  }
+}
