@@ -21,6 +21,13 @@
 		top: 0;
 		background: rgba(255,255,255, .9);
 		height: 100%;
+	
+	@include screen-small{
+		position: relative;
+		right: auto;
+		top: auto; 
+		bottom: auto;
+	}
 	}
 		
 	.icons {
@@ -33,7 +40,13 @@
 	&:hover {
 		opacity: 1;
 	}
-		
+	
+	@include screen-small{
+		position: absolute;left: 0; top: 0;
+		float: none;
+		opacity: 1;
+		background-color: #FFF;
+	}	
 	}
 	
 	section {
@@ -48,6 +61,11 @@
 		}
 	}
 			
+	@include screen-small{
+		left: 1em;
+	}
+
+
 }	
 
 	

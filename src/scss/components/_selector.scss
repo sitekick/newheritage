@@ -15,6 +15,10 @@
 	content: '\25BC';
 	margin-right: 10px;
 }				
+
+@include screen-small {
+	display: none;
+}
 }
 
 #selector{
@@ -26,25 +30,42 @@
 	> .wrapper {
 		margin: 0 10px;
 		position: absolute;
+	
+		@include screen-small{
+			margin: 10px 0;
+			display: flex;
+			position: absolute; 
+			flex-flow: row nowrap;
+		}
 	}
-		canvas{
-			display: block;
-		}
+	
+	canvas{
+		display: block;
+	}
 		
-		.canvas-color{
-			position: absolute;
-			opacity: 0; 
-		}	
+	.canvas-color{
+		position: absolute;
+		opacity: 0; 
+	}	
 		
-		.option{
-			position: relative;
-			cursor: pointer;
-			margin-bottom: 10px;
-		}
+	.option{
+		position: relative;
+		cursor: pointer;
+		margin-bottom: 10px;
 		
-		.option:hover .canvas-color{
-			opacity: 1; 
+		@include screen-small{
+			margin-right: 10px;
 		}
+	}
+		
+	.option:hover .canvas-color{
+		opacity: 1; 
+	}
+
+	@include screen-small{
+		position: relative;
+		margin-bottom: 1em;
+	}
 
 }
 	

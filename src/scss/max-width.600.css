@@ -9,71 +9,83 @@
 		nav > .wrapper,
 		main > .wrapper,
 		footer > .wrapper {
-			margin: 0 1em;
+/* 			margin: 0 1em; */
 		}
 		
 	
 	header > .wrapper {
+/*
 		flex-flow: column;
 		height: auto
+*/
 	}
 		header div.dropdown{
+/*
 			flex: 1 1 auto;
 			width: 100%;
 			position: relative; 
 			text-align: center;
+*/
 		}
 			header button{
-				display: none;
+/* 				display: none; */
 			}
 	
 	
 
 #selector{
+/*
 	position: relative;
 	margin-bottom: 1em;
+*/
 }
 	#selector > .wrapper {
+/*
 		margin: 10px 0;
 		display: flex;
 		position: absolute; 
 		flex-flow: row nowrap;
+*/
 	}
 	
 	#selector .option{
-			margin-right: 10px;
+/* 			margin-right: 10px; */
 		}
 
  nav ul {
-	 width: auto;
+/* 	 width: auto; */
  }
 
  nav li{
-	 text-align: center;
+/* 	 text-align: center; */
  }
  
  main {
-	 position: relative;
+/* 	 position: relative; */
  }
  main .content {
-	 width: auto;
+/* 	 width: auto; */
 	 }
 	 
  #modal {
-	left: 1em;
+/* 	left: 1em; */
 	}		
 	
 	#modal .info{
+/*
 			position: relative;
 			right: auto;
 			top: auto; 
 			bottom: auto;
+*/
 		}
 	#modal .icons {
+/*
 			position: absolute;left: 0; top: 0;
 			float: none;
 			opacity: 1;
 			background-color: #FFF;
+*/
 		}
 
 }/* end media */

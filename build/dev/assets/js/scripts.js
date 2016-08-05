@@ -87,13 +87,18 @@ $(function () {
 	*/
 	var resizeid, active, selected;
 	var options = [];
+	
+	var appdata = {
+		projects : [],
+		people : []
+	};
 	var projects = [];
 	var people = [];
-	var viewport = ( $(window).width() >= 600 ) ? 'desktop' : 'mobile';
+	var viewport = ( $(window).width() >= 768 ) ? 'desktop' : 'mobile';
 	
 	getProjects();
 	getPeople();
-	
+	//console.log(appdata);
 	//Main Navigation		
 	$('nav a').on('click', function () {
 		$('nav a.active').removeClass('active');
@@ -105,12 +110,14 @@ $(function () {
 
 		switch(active){
 			case 'projects':
-				options = projects;
+// 				options = projects;
+				options = appdata.projects;
 				// reset button
 				$('header button').text('Select Project...');
 			break;
 			case 'people':
-				options = people;
+// 				options = people;
+				options = appdata.people;
 				// reset button
 				$('header button').text('Select Person...');
 			break;
@@ -133,6 +140,7 @@ $(function () {
 		
 		$.getJSON('assets/data/projects.json')
 		.done(function(data) {
+			
 			$.each( data.projects.project, function( i, item ) {
  					var specs = {
  						'id' : 'canvas-' + i,
@@ -142,7 +150,10 @@ $(function () {
  						'image' : item.image
 						}
 				projects.push(specs);
+				
 			});
+			//console.log(data);
+			appdata.projects = data.projects.project;
 			//default page
 			init();
   		})
@@ -164,6 +175,7 @@ $(function () {
 						}
 					people.push(specs);
 			});
+			appdata.people = data.people.person;
   		})
   		.fail(function() {
   			console.log( "error" );
@@ -185,7 +197,7 @@ $(function () {
 	});
 	
 	function resizeComplete (){
-		viewport = ( $(window).width() >= 600 ) ? 'desktop' : 'mobile';
+		viewport = ( $(window).width() >= 768 ) ? 'desktop' : 'mobile';
 		headClass();
 		
 		buildSelector(options);
@@ -429,7 +441,11 @@ $(function () {
 	function buildSelector(options_array){
 		// attach selector
 		var op = '<div id="selector" class="' + active + '"><div class="wrapper">';
-  		for(i = 0; i < options_array.length; i++) {
+  		for(var i = 0; i < options_array.length; i++) {
+
+  			op += '<div class="option"><canvas id="' + options_array[i].id + '" data-src="' + options_array[i].image + '"></div>'
+
+/*
 	  		switch(active){
 		  		case 'people' :
 		  		case 'projects' : 
@@ -439,6 +455,7 @@ $(function () {
 		  			return;
 		  		break;
 	  		}
+*/
   		}
   		op += '</div></div>';
 		
@@ -453,11 +470,10 @@ $(function () {
 	var canvases = $('#selector canvas');
 
 		$.each(canvases, function(key, value){
-			//console.log(value);
+			
 			var img_src = $(value).attr('data-src');
 			var context = value.getContext('2d');
 			var img = new Image();
- 			
  			var dims = readFileName(img_src);
  			var canvas_props = selectorCanvasProperties(dims, selector_props, 10);
 
@@ -546,11 +562,10 @@ $(function () {
 		
 		//return [width,height]
 		var delimeters = imagepath.split('/')
-// 		var filename = delimeters[3];
 		var filename = delimeters[4];
 		var src_width = Number( filename.substring(0, filename.indexOf("x") ) );
 		var src_height = Number( filename.substring(filename.indexOf("x") + 1, filename.indexOf(".jpg")) );
-		console.log(src_width,src_height);
+		
 		return [src_width,src_height];
 	}
 	

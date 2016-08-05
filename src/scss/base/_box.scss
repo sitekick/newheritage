@@ -11,9 +11,13 @@ nav,
 main,
 footer {
 	
-		> .wrapper{
-			 margin: 0 6em;
-		}			
+	> .wrapper{
+		margin: 0 6em;
+			 
+		@include screen-small{
+			margin: 0 1em;
+		}
+	}			
 }	
 
 header {
@@ -23,23 +27,55 @@ header {
 		display: flex;
 		flex-flow: row nowrap;
 		align-items: center;
-		height: 125px;
+// 		height: 125px;
 	
 		div {
 		
-		&.logo{
-			flex: 1 1 auto;
+			&.logo{
+				flex: 1 1 auto;
+			
+			@include screen-full{
+				margin-right: 20em;
+			}
+			@include screen-large{
+				margin-right: 12em;
+			}
+			@include screen-medium{
+				margin-right: 8em;
+			}
+			@include screen-small{
+				margin-right:0;
+			}
+			}
+			&.dropdown{
+				flex: 0 0 35%;
+				text-align: left;
+			
+			@include screen-small{
+				flex: 1 1 auto;
+				position: relative; 
+			}
+			}
+		
+		@include screen-small{
+			width: 100%;
 		}
-		&.dropdown{
-			flex: 0 0 35%;
-			text-align: left;
 		}
-		}
+	
+	@include screen-small{
+		flex-flow: column;
 	}
+	}
+
+@include screen-small{
+	margin-bottom: 0;
+}
 }
 
 nav {
 	margin-bottom: 2em;
+
+
 }
 
 main {
@@ -51,6 +87,15 @@ main {
 	&.contact {
 		display: none;
 	}
+	
+	@include screen-small{
+		width: auto;
 	}
+	}
+	
+	@include screen-small{
+		position: relative;
+	}
+
 }
 

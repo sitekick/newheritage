@@ -3,6 +3,21 @@ body {
 	color: $white;
 	overflow: hidden;
 }
+/* =========== ANCHOR ============= */
+
+a {
+	nav &{
+		text-decoration: none;
+		
+		&.active{
+			color: $white;
+		}
+	}
+}
+
+
+
+
 
 /* =========== IMAGES ============= */
 
@@ -11,8 +26,13 @@ img {
 	&.autosize {
 		max-width: 100%;
 		height: auto;
-	}	
-	
+	}
+	.logo &{
+		
+	@include screen-small{
+		margin:0 4em;
+	}
+	}
 }
 
 /* =========== ELEMENTS ============= */

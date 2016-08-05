@@ -15,7 +15,14 @@ nav {
 		&.active {
 			color: #FFF;
 		}
+		
+		@include screen-small{
+			text-align: center;
+		}
 		}
 	
+	@include screen-small{
+		width: auto;
+	}
 	}
 }

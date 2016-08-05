@@ -14,6 +14,14 @@ main > .wrapper,
 footer > .wrapper {
   margin: 0 6em;
 }
+@media screen and (max-width: 768px) {
+  header > .wrapper,
+  nav > .wrapper,
+  main > .wrapper,
+  footer > .wrapper {
+    margin: 0 1em;
+  }
+}
 
 header {
   margin-bottom: 2em;
@@ -27,18 +35,61 @@ header > .wrapper {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  height: 125px;
 }
 header > .wrapper div.logo {
   -webkit-box-flex: 1;
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
 }
+@media screen and (min-width: 1324px) {
+  header > .wrapper div.logo {
+    margin-right: 20em;
+  }
+}
+@media screen and (min-width: 1024px) and (max-width: 1324px) {
+  header > .wrapper div.logo {
+    margin-right: 12em;
+  }
+}
+@media screen and (max-width: 1024px) {
+  header > .wrapper div.logo {
+    margin-right: 8em;
+  }
+}
+@media screen and (max-width: 768px) {
+  header > .wrapper div.logo {
+    margin-right: 0;
+  }
+}
 header > .wrapper div.dropdown {
   -webkit-box-flex: 0;
       -ms-flex: 0 0 35%;
           flex: 0 0 35%;
   text-align: left;
+}
+@media screen and (max-width: 768px) {
+  header > .wrapper div.dropdown {
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+    position: relative;
+  }
+}
+@media screen and (max-width: 768px) {
+  header > .wrapper div {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 768px) {
+  header > .wrapper {
+    -ms-flex-flow: column;
+        flex-flow: column;
+  }
+}
+@media screen and (max-width: 768px) {
+  header {
+    margin-bottom: 0;
+  }
 }
 
 nav {
@@ -51,6 +102,16 @@ main .content {
 main .content.people, main .content.projects, main .content.contact {
   display: none;
 }
+@media screen and (max-width: 768px) {
+  main .content {
+    width: auto;
+  }
+}
+@media screen and (max-width: 768px) {
+  main {
+    position: relative;
+  }
+}
 
 body {
   background: #EF4136;
@@ -58,10 +119,23 @@ body {
   overflow: hidden;
 }
 
+/* =========== ANCHOR ============= */
+nav a {
+  text-decoration: none;
+}
+nav a.active {
+  color: #FFF;
+}
+
 /* =========== IMAGES ============= */
 img.autosize {
   max-width: 100%;
   height: auto;
+}
+@media screen and (max-width: 768px) {
+  .logo img {
+    margin: 0 4em;
+  }
 }
 
 /* =========== ELEMENTS ============= */
@@ -97,6 +171,16 @@ nav ul li {
 nav ul li.active {
   color: #FFF;
 }
+@media screen and (max-width: 768px) {
+  nav ul li {
+    text-align: center;
+  }
+}
+@media screen and (max-width: 768px) {
+  nav ul {
+    width: auto;
+  }
+}
 
 #selector_button {
   background: none;
@@ -114,6 +198,11 @@ nav ul li.active {
   content: '\25BC';
   margin-right: 10px;
 }
+@media screen and (max-width: 768px) {
+  #selector_button {
+    display: none;
+  }
+}
 
 #selector {
   background: #FFF;
@@ -124,6 +213,17 @@ nav ul li.active {
 #selector > .wrapper {
   margin: 0 10px;
   position: absolute;
+}
+@media screen and (max-width: 768px) {
+  #selector > .wrapper {
+    margin: 10px 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    position: absolute;
+    -ms-flex-flow: row nowrap;
+        flex-flow: row nowrap;
+  }
 }
 #selector canvas {
   display: block;
@@ -137,8 +237,19 @@ nav ul li.active {
   cursor: pointer;
   margin-bottom: 10px;
 }
+@media screen and (max-width: 768px) {
+  #selector .option {
+    margin-right: 10px;
+  }
+}
 #selector .option:hover .canvas-color {
   opacity: 1;
+}
+@media screen and (max-width: 768px) {
+  #selector {
+    position: relative;
+    margin-bottom: 1em;
+  }
 }
 
 #modal {
@@ -164,6 +275,14 @@ nav ul li.active {
   background: rgba(255, 255, 255, 0.9);
   height: 100%;
 }
+@media screen and (max-width: 768px) {
+  #modal .info {
+    position: relative;
+    right: auto;
+    top: auto;
+    bottom: auto;
+  }
+}
 #modal .icons {
   width: 30px;
   height: 30px;
@@ -175,6 +294,16 @@ nav ul li.active {
 #modal .icons:hover {
   opacity: 1;
 }
+@media screen and (max-width: 768px) {
+  #modal .icons {
+    position: absolute;
+    left: 0;
+    top: 0;
+    float: none;
+    opacity: 1;
+    background-color: #FFF;
+  }
+}
 #modal section {
   margin: 1em;
 }
@@ -183,6 +312,11 @@ nav ul li.active {
 }
 #modal section p {
   margin: 0 0 1em 0;
+}
+@media screen and (max-width: 768px) {
+  #modal {
+    left: 1em;
+  }
 }
 
 
