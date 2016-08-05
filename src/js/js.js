@@ -48,7 +48,7 @@ $(function () {
 		
 	function getProjects(){
 		
-		$.getJSON('/js/data.projects.json')
+		$.getJSON('assets/data/projects.json')
 		.done(function(data) {
 			$.each( data.projects.project, function( i, item ) {
  					var specs = {
@@ -69,7 +69,7 @@ $(function () {
 	}
 	function getPeople(){
 		
-		$.getJSON('/js/data.people.json')
+		$.getJSON('assets/data/people.json')
 		.done(function(data) {
 			$.each( data.people.person, function( i, item ) {
 					var specs = {
@@ -141,6 +141,7 @@ $(function () {
 		if(!selected) return;
 		
 		var srcImagePath = selected.image;
+		
 		//viewport(v) dimensions
 		var vw = $(window).width();
 		var vh = $(window).height();
@@ -343,7 +344,6 @@ $(function () {
 	}
 
 	function buildSelector(options_array){
-		
 		// attach selector
 		var op = '<div id="selector" class="' + active + '"><div class="wrapper">';
   		for(i = 0; i < options_array.length; i++) {
@@ -370,7 +370,7 @@ $(function () {
 	var canvases = $('#selector canvas');
 
 		$.each(canvases, function(key, value){
-			
+			//console.log(value);
 			var img_src = $(value).attr('data-src');
 			var context = value.getContext('2d');
 			var img = new Image();
@@ -460,12 +460,14 @@ $(function () {
 	}
 	
 	function readFileName(imagepath){
+		
 		//return [width,height]
 		var delimeters = imagepath.split('/')
-		var filename = delimeters[3];
-		var src_width = Number( filename.substring(0, delimeters[3].indexOf("x") ) );
-		var src_height = Number( filename.substring(delimeters[3].indexOf("x") + 1, delimeters[3].indexOf(".jpg")) );
-		
+// 		var filename = delimeters[3];
+		var filename = delimeters[4];
+		var src_width = Number( filename.substring(0, filename.indexOf("x") ) );
+		var src_height = Number( filename.substring(filename.indexOf("x") + 1, filename.indexOf(".jpg")) );
+		console.log(src_width,src_height);
 		return [src_width,src_height];
 	}
 	

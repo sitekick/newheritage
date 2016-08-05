@@ -1,5 +1,5 @@
 function drawImageProp(ctx, img, x, y, w, h, offsetX, offsetY) {
-
+	
     if (arguments.length === 2) {
         x = y = 0;
         w = ctx.canvas.width;
@@ -50,6 +50,7 @@ function drawImageProp(ctx, img, x, y, w, h, offsetX, offsetY) {
 
 function grayscaleImg(ctx, width, height) {
 
+        
         var imgData = ctx.getImageData(0, 0, width, height);
 		var data = imgData.data;
         

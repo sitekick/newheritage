@@ -9,8 +9,12 @@ module.exports = {
 		src : src + 'data/*.json',
 		dest : dist + dev + 'assets/data'
 	},
+	images :  {
+		src : [src + 'img/**/*', '!' + src + 'img/arch','!' + src + 'img/arch/**/*'],
+		dest : dist + dev + 'assets/img'
+	},
 	scripts : {
-		src : 	[src + 'js/**/*.js', '!' + src + 'js/arch/**/*'],
+		src : 	[src + 'js/**/*.js', '!' + src + 'js/arch','!' + src + 'js/arch/**/*'],
 		dest : dist + dev + 'assets/js'
 	},
 	sass : {

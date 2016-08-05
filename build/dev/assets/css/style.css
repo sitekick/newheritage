@@ -169,7 +169,7 @@ nav ul li.active {
   height: 30px;
   float: right;
   opacity: .5;
-  background: url("img/icon.png") center center no-repeat;
+  background: url(../img/icon.png) center center no-repeat;
   cursor: pointer;
 }
 #modal .icons:hover {
