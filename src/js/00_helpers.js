@@ -80,3 +80,50 @@ function tintImg(ctx, width, height, hex) {
 }
 
 
+function canvasClone(canvas) {
+		
+		var colCanvas = document.createElement('canvas');
+		var colContext = colCanvas.getContext('2d');
+		colCanvas.id = canvas.id + '-color';
+		colCanvas.className = 'canvas-color';
+		colCanvas.width = canvas.width;
+		colCanvas.height = canvas.height;
+		colContext.drawImage(canvas, 0, 0, canvas.width, canvas.height  );
+		return colCanvas;
+	}
+	
+	function canvasDimension(src_dimensions, mode, calc_value){
+		// src_dimensions: array [0]width [1]height of source image
+		// mode: string to determine what to calculate ('width' || 'height')
+		// calc_value: number to use for calculation (width || height)
+		var perc;
+		
+		switch(mode){
+			
+			case 'height' :
+				//calculate height;
+				perc = calc_value / src_dimensions[0];
+				return Math.floor(perc * src_dimensions[1]);
+			break;
+			case 'width' :
+				//calculate width;
+				perc = calc_value / src_dimensions[1];
+				return Math.floor(perc * src_dimensions[0]);
+			break;
+			default :
+				return 300;
+			break;
+		}
+				
+	}
+	
+	function readFileName(imagepath){
+		
+		//get image dimensions from filename; example 1000x669.jpg
+		var delimeters = imagepath.split('/')
+		var filename = delimeters[4];
+		var src_width = Number( filename.substring(0, filename.indexOf("x") ) );
+		var src_height = Number( filename.substring(filename.indexOf("x") + 1, filename.indexOf(".jpg")) );
+		
+		return [src_width,src_height];
+	}

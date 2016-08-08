@@ -6,7 +6,7 @@ var src		=	'./src/',
 	
 module.exports = {
 	data :  {
-		src : src + 'data/*.json',
+		src : [src + 'data/*.json','!' + src + 'data/arch','!' + src + 'data/arch/**/*'],
 		dest : dist + dev + 'assets/data'
 	},
 	images :  {
