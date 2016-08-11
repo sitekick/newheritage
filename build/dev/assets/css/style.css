@@ -211,22 +211,26 @@ nav ul li.active {
 #selector canvas {
   display: block;
 }
-#selector .canvas-color {
-  position: absolute;
-  opacity: 0;
-}
 #selector .option {
   position: relative;
   cursor: pointer;
   margin-bottom: 10px;
 }
+#selector .option .canvas-color {
+  position: absolute;
+  opacity: 0;
+  -webkit-transition-property: opacity;
+  transition-property: opacity;
+  -webkit-transition-duration: .35s;
+          transition-duration: .35s;
+}
+#selector .option:hover .canvas-color {
+  opacity: 1;
+}
 @media screen and (max-width: 768px) {
   #selector .option {
     margin-right: 10px;
   }
-}
-#selector .option:hover .canvas-color {
-  opacity: 1;
 }
 @media screen and (max-width: 768px) {
   #selector {
@@ -251,6 +255,12 @@ nav ul li.active {
 }
 #modal > .wrapper {
   position: relative;
+}
+#modal canvas {
+  /*
+  		opacity: 0;
+  		transition-property: opacity;
+  */
 }
 #modal .info {
   position: absolute;

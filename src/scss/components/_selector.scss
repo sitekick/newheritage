@@ -45,31 +45,39 @@
 		display: block;
 	}
 		
-	.canvas-color{
-		position: absolute;
-		opacity: 0; 
-	}	
 		
 	.option{
 		position: relative;
 		cursor: pointer;
 		margin-bottom: 10px;
 		
-		@include screen-small{
-			margin-right: 10px;
+		.canvas-color{
+			position: absolute;
+			opacity: 0; 
+			transition-property: opacity;
+			transition-duration: .35s;
+
 		}
+	
+	&:hover {
+		
+		.canvas-color{
+			opacity: 1;
+		} 
+	}	
+	
+	@include screen-small{
+		margin-right: 10px;
+	}
 	}
 		
-	.option:hover .canvas-color{
-		opacity: 1; 
-	}
+	
 
-	@include screen-small{
-		position: relative;
-		overflow-x: scroll;
-		overflow-y: hidden;
-		margin-bottom: 1em;
-	}
-
+@include screen-small{
+	position: relative;
+	overflow-x: scroll;
+	overflow-y: hidden;
+	margin-bottom: 1em;
+}
 }
 	
