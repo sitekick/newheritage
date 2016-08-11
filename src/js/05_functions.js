@@ -22,7 +22,7 @@ $(function () {
 		
 		//with true to set initial state
 	
-	resizeQuery(events);
+	resizeQuery(events, true);
 	
 	$.getJSON('assets/data/data.json')
 		.done(function(data) {
@@ -65,36 +65,33 @@ $(function () {
 		buildSelector();
 	}
 	
-	
-	function resetLayout(element) {
+	function vignetteCanvas(canvas){
 		
-		switch(element) {
-			case 'selector':
-				$('#selector').remove();
-			break;
-			case 'modal' :
-				$('#modal').remove();
-			break;
-			case 'background' :
-				$('#backcanvas').remove();
-			break;
-			default:
-				$('#selector').remove();
-				$('#modal').remove();
-				$('#backcanvas').remove();
-			break;
-		}
+		//apply sized/cropped background image to modal window
+		
+		var vignetteCanvas = document.createElement('canvas');
+		var vignetteContext = vignetteCanvas.getContext('2d');
+		var modal_offset = $('#modal .wrapper').offset();
+		//console.log(modal_offset);
+		var border = 4;
+		var offx = modal_offset.left + border;
+		var offy = modal_offset.top + border;
+		var cw = $('#modal').width();
+		var ch = $('#modal').height() ;
+		
+		vignetteCanvas.id = 'vignette';
+		vignetteCanvas.width = cw;
+		vignetteCanvas.height = ch;
+		vignetteContext.drawImage(canvas,offx,offy,cw,ch,border,border,cw-(border*2),ch );
+		
+		$('#modal .wrapper').append(vignetteCanvas);
 	}
-	
-	function hideSelector(){
-		$('#selector').css('display','none');
-	}
-	
-	function desktopImage(){
 		
-		if(!selected) return;
+	function desktopImage(srcImagePath){
 		
-		var srcImagePath = selected.image;
+		if(srcImagePath == undefined) return;
+		
+		//var srcImagePath = selected.image;
 		
 		//viewport(v) dimensions
 		var vw = $(window).width();
@@ -119,11 +116,13 @@ $(function () {
 		
 	}
 	
-	function mobileImage() {
+	function mobileImage(srcImagePath) {
+		
+		if(srcImagePath == undefined) return;
 		
 		var mobileCanvas = document.createElement('canvas');
 		var mobileCtx = mobileCanvas.getContext('2d');
-		var srcImagePath = selected.image;
+		//var srcImagePath = selected.image;
 		var srcImage = new Image();
 		var border = 2;
 		var dims = readFileName(srcImagePath);
@@ -156,7 +155,45 @@ $(function () {
 		};
 		
 	}
+	function buildModal(data){
+		
+		selectorButtonToggle(data.name);
+		
 	
+		var modal_props = modalProperties();
+		var modal = '<div id="modal"><div class="wrapper">';
+	
+		resetLayout('background');
+		hideSelector();
+		
+		if(viewport == 'mobile'){
+		modal += `<div class="icons">&nbsp;</div><div class="info">
+		<section><h3>Location</h3><p>${data.title}</p></section>
+		<section><h3>Summary</h3><p>${data.summary}</p></section>
+		</div>`;
+		} else {
+		modal += `<div class="info"><div class="icons">&nbsp;</div>
+		<section><h3>Location</h3><p>${data.title}</p></section>
+		<section><h3>Summary</h3><p>${data.summary}</p></section>
+		</div>`;	
+		};
+		modal += '</div></div>';
+		
+		$('body').append(modal);
+		
+		if(viewport == 'mobile'){
+		$('#modal').css({ 'top' : modal_props.top, 'width' : modal_props.width });
+		mobileImage(data.image);	
+			} else {
+		$('#modal').css({'bottom' : 0, 'height' : modal_props.height, 'width' : modal_props.width });
+		$('#modal .info').css({'width' : modal_props.info.width});		
+		desktopImage(data.image);	
+			}
+		
+		modalEvents();
+	}
+	
+/*
 	function buildDesktopModal(){
 		
 		var modal_props = modalProperties();
@@ -174,7 +211,9 @@ $(function () {
 		modalEvents();
 		
 	}
+*/
 	
+/*
 	function buildMobileModal(){
 		
 		var modal_props = modalProperties();
@@ -189,6 +228,7 @@ $(function () {
 		mobileImage();
 		modalEvents();
 	}
+*/
 
 	function modalEvents(){
 		// Close Modal Button
@@ -199,29 +239,17 @@ $(function () {
 		});
 	}
 	
-
-	
-	function vignetteCanvas(canvas){
+	function selectorButtonToggle(text) {
+		//control button 
+		var button = document.getElementById('selector_button');
 		
-		//apply sized/cropped background image to modal window
-		
-		var vignetteCanvas = document.createElement('canvas');
-		var vignetteContext = vignetteCanvas.getContext('2d');
-		var modal_offset = $('#modal .wrapper').offset();
-		var border = 4;
-		var offx = modal_offset.left + border;
-		var offy = modal_offset.top + border;
-		var cw = $('#modal').width();
-		var ch = $('#modal').height() ;
-		
-		vignetteCanvas.id = 'vignette';
-		vignetteCanvas.width = cw;
-		vignetteCanvas.height = ch;
-		vignetteContext.drawImage(canvas,offx,offy,cw,ch,border,border,cw-(border*2),ch );
-		
-		$('#modal .wrapper').append(vignetteCanvas);
+		if(text){
+			button.innerText = text;
+		} else {
+			button.css('display','none');
+		}
 	}
-	
+
 	function selectorProperties() {
 		
 		var dropdown_offset = $('div.dropdown').offset();
@@ -271,7 +299,7 @@ $(function () {
 		var op = `<div id="selector" class="${active}"><div class="wrapper">`;
   		
   		for(var i = 0; i < options.length; i++) {
-  			op += `<div class="option"><canvas id="${options[i].id}" data-src="${options[i].image}"></div>`
+  			op += `<div class="option"><canvas id="canvas-${i}" data-src="${options[i].image}"></div>`
   		}
   		
   		op += '</div></div>';
@@ -310,6 +338,7 @@ $(function () {
 		
 		// EVENTS
 		// Click
+/*
 		$('#selector div.option').on('click', function(){
 			$('#selector div.selected').removeClass('selected');
 			$(this).toggleClass('selected');
@@ -326,7 +355,54 @@ $(function () {
 			} else {
 				buildDesktopModal();
 			}
-			
-		})
-	}
+		});
+*/
+		// Drag 
+		var callback = {
+			func : clickEvent,
+			params : {
+				targetEl : 'canvas',
+				data : options
+			}
+		};
+		
+		dragScroll('selector', (viewport == 'desktop') ? true : false, callback);
+		
+		
+	}//buildSelector
+
+	function clickEvent(clicked, params){
+	
+	//receives target of click event object; check for proper type 
+	
+	var type = clicked.tagName.toLowerCase();
+	
+	if(type != params.targetEl) return;
+	
+	var cid = clicked.id;
+	//affect navigation
+	var prev = document.querySelector('.option.selected');
+	if(prev) removeClass(prev, 'selected');
+	var option = document.getElementById(cid).parentNode;
+	addClass(option, 'selected');
+	
+	// determine id of clicked option from c
+	// i.e. canvas-0-color; canvas-12-color
+	var start = (cid.indexOf('-')) + 1;
+	var end = (cid.lastIndexOf('-'));
+	var cindex = Number(cid.substring(start, end ));	
+	
+	//retrieve data
+	var options = params.data;
+	var selected = (options[cindex]);
+	
+	
+	buildModal(selected);	
+
+}
+
+
+
+
+
 })

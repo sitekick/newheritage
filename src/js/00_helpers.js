@@ -117,6 +117,9 @@ function canvasClone(canvas) {
 				
 	}
 	
+
+	
+	
 	function readFileName(imagepath){
 		
 		//get image dimensions from filename; example 1000x669.jpg
@@ -127,3 +130,51 @@ function canvasClone(canvas) {
 		
 		return [src_width,src_height];
 	}
+
+//js class manipulation
+function hasClass(el, className) {
+  if (el.classList)
+    return el.classList.contains(className)
+  else
+    return !!el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'))
+}
+
+function addClass(el, className) {
+  if (el.classList)
+    el.classList.add(className)
+  else if (!hasClass(el, className)) el.className += " " + className
+}
+
+function removeClass(el, className) {
+  if (el.classList)
+    el.classList.remove(className)
+  else if (hasClass(el, className)) {
+    var reg = new RegExp('(\\s|^)' + className + '(\\s|$)')
+    el.className=el.className.replace(reg, ' ')
+  }
+}
+
+
+function resetLayout(element) {
+		
+		switch(element) {
+			case 'selector':
+				$('#selector').remove();
+			break;
+			case 'modal' :
+				$('#modal').remove();
+			break;
+			case 'background' :
+				$('#backcanvas').remove();
+			break;
+			default:
+				$('#selector').remove();
+				$('#modal').remove();
+				$('#backcanvas').remove();
+			break;
+		}
+	}
+	
+function hideSelector(){
+	$('#selector').css('display','none');
+}

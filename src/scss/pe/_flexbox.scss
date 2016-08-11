@@ -1,0 +1,25 @@
+header {
+	
+	> .wrapper{
+		display: flex;
+		flex-flow: row nowrap;
+		align-items: center;
+	
+		div {
+		
+		&.logo{
+			flex: 1 1 auto;
+		}
+		&.dropdown{
+			flex: 0 0 35%;
+			width: auto;
+		@include screen-small{
+			flex: 1 1 auto;
+		}
+		}
+		}
+	@include screen-small{
+		flex-flow: column;
+	}
+	}
+}	

@@ -24,15 +24,13 @@ header {
 	margin-bottom: 2em;
 	
 	> .wrapper{
-		display: flex;
-		flex-flow: row nowrap;
-		align-items: center;
-// 		height: 125px;
+		display: table;
 	
 		div {
-		
+			display: table-cell;
+			
 			&.logo{
-				flex: 1 1 auto;
+				
 			
 			@include screen-full{
 				margin-right: 20em;
@@ -48,23 +46,20 @@ header {
 			}
 			}
 			&.dropdown{
-				flex: 0 0 35%;
 				text-align: left;
+				width: 35%;
 			
 			@include screen-small{
-				flex: 1 1 auto;
 				position: relative; 
 			}
 			}
 		
 		@include screen-small{
+			display: block;
 			width: 100%;
 		}
 		}
 	
-	@include screen-small{
-		flex-flow: column;
-	}
 	}
 
 @include screen-small{
