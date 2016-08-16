@@ -79,7 +79,7 @@ var resizeQuery = (function () {
 				fireCallback(eventsobj,currentMQ);
 			}
 			
-			$(window).resize(function(){
+			window.onresize = function() {
 				var newMQ = idQuery();
 			
 				if(newMQ != tmpMQ){
@@ -91,9 +91,8 @@ var resizeQuery = (function () {
 					
 					tmpMQ = newMQ;
 				};
-				
-			});
-			
+			};
+
 		}
 		
 		function idQuery() {
@@ -260,13 +259,23 @@ function resetLayout(element) {
 	switch(element) {
 		case 'selector':
 			$('#selector').remove();
-				break;
+		break;
 		case 'modal' :
 			$('#modal').remove();
-			break;
+		break;
 		case 'background' :
 			$('#backcanvas').remove();
-			break;
+		break;
+		// !element remove all but element
+		case '!selector':
+			$('#modal').remove();
+			$('#backcanvas').remove();
+		break;
+		case '!modal':
+			$('#selector').remove();
+			$('#backcanvas').remove();
+		break;	
+			
 		default:
 			$('#selector').remove();
 			$('#modal').remove();
@@ -279,39 +288,39 @@ function hideSelector(){
 	$('#selector').css('display','none');
 }
 
-function selectorButtonToggle(text) {
-	//control button 
+function layoutToggle(text) {
+	 
 	var button = document.getElementById('selector_button');
-		
+	var selector = document.getElementById('selector');
+	var main = document.querySelector('main')	
+	
 	if(text){
 		button.innerText = text;
+		addClass(main, 'fade');
+		
 	} else {
-		button.css('display','none');
+		button.innerText = '';
+		removeClass(main, 'fade');
+		resetLayout('!selector');
+		selector.style.display = 'block';
 	}
 }
-function buildModal(data, mode){
+function buildModal(data, mode, method){
 		
-	selectorButtonToggle(data.name);
+	layoutToggle(data.name);
 		
-	var modal_props = _modalProperties();
-	var modal = '<div id="modal"><div class="wrapper">';
 	
+	var modal_props = _modalProperties();
+	
+	//resetLayout('!modal');
 	resetLayout('background');
 	hideSelector();
-		
-	if(mode == 'mobile'){
-		modal += `<div class="icons">&nbsp;</div><div class="info">
-		<section><h3>Location</h3><p>${data.title}</p></section>
-		<section><h3>Summary</h3><p>${data.summary}</p></section>
-		</div>`;
-	} else {
-		modal += `<div class="info"><div class="icons">&nbsp;</div>
-		<section><h3>Location</h3><p>${data.title}</p></section>
-		<section><h3>Summary</h3><p>${data.summary}</p></section>
-		</div>`;	
-	};
 	
-	modal += '</div></div>';
+	var modal = `<div id="modal" class="${method} ${mode}" tabindex="1"><div class="wrapper">	
+	<div class="controls" tabindex="1"><div class="icon"></div></div>
+	<div class="info"><section><h3>Location</h3><p>${data.title}</p></section>
+	<section><h3>Summary</h3><p>${data.summary}</p></section>
+	</div></div></div>`;
 		
 	$('body').append(modal);
 		
@@ -330,7 +339,7 @@ function buildModal(data, mode){
 			
 	}
 		
-	_modalEvents();
+	_modalEvents(method);
 }
 
 
@@ -404,13 +413,31 @@ function _modalProperties() {
 }
 	
 
-function _modalEvents(){
-	// Close Modal Button
-	$('#modal .icons').on('click', function(){
-		resetLayout('modal');
-		resetLayout('background');
-		$('#selector').css('display','block');
+function _modalEvents(method){
+	
+	var modal = document.getElementById('modal');
+	var button = modal.querySelector('.controls');
+	
+	if(method == 'tabbed') modal.focus();
+	
+	button.addEventListener('keydown', function (e){
+		if(e.key == 'Enter'){
+/*
+			resetLayout('!selector');
+			$('#selector').css('display','block');
+*/
+		layoutToggle();
+		}
 	});
+	button.addEventListener('click', function (e){
+/*
+		resetLayout('!selector');
+		$('#selector').css('display','block');
+*/
+	layoutToggle();
+	}, false);	
+	
+		
 }
 
 function buildSelector(options, mode){
@@ -418,7 +445,8 @@ function buildSelector(options, mode){
   	var op = `<div id="selector"><div class="wrapper">`;	
   	
   	for(var i = 0; i < options.length; i++) {
-  		op += `<div class="option"><canvas id="canvas-${i}" data-src="${options[i].image}"></div>`
+  		op += `<div class="option" tabindex="2"><canvas id="canvas-${i}" data-src="${options[i].image}"></div>`
+
   	}
   		
   	op += '</div></div>';
@@ -454,21 +482,45 @@ function buildSelector(options, mode){
 		
 	});
 		
+	//Events
+	//focus
+	var focus_options = document.querySelectorAll('.option');
+	
+	for(var i=0; i < focus_options.length; i++){
+			focus_options[i].addEventListener('focus', function (){
+				this.querySelector('.canvas-color').style.opacity = 1;
+			}, true);
+			focus_options[i].addEventListener('focusout', function (){
+				this.querySelector('.canvas-color').style.opacity = 0;
+			}, true);
+			focus_options[i].addEventListener('keydown', function (e){
+				 if(e.key == 'Enter'){
+				 	var target = this.querySelector('.canvas-color')
+				 	var params = {
+					 	targetEl : 'canvas',
+					 	data : options,
+					 	mode : mode,
+					 	method: 'tabbed'
+				 	}
+				 	_activateEvent(target, params);
+				 	}
+				});
+	};
+	
 	// Drag 
 	var callback = {
-		func : _clickEvent,
+		func : _activateEvent,
 		params : {
 			targetEl : 'canvas',
 			data : options,
-			mode : mode
+			mode : mode,
+			method : 'clicked'
 		}
 	};
 		
 	dragScroll('selector', (mode == 'desktop') ? true : false, callback);
 		
 }//buildSelector
-
-
 
 
 
@@ -525,7 +577,7 @@ function _readFileName(imagepath){
 }
 
 
-function _clickEvent(clicked, params){
+function _activateEvent(clicked, params){
 	
 	//receives target of click event object; check for proper type 
 	
@@ -551,7 +603,7 @@ function _clickEvent(clicked, params){
 	var selected = (options[cindex]);
 	
 	
-	buildModal(selected, params.mode);	
+	buildModal(selected, params.mode, params.method);	
 
 }
 

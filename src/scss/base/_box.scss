@@ -74,6 +74,9 @@ nav {
 }
 
 main {
+	opacity: 1;
+	transition: opacity .5s;
+	
 	.content {
 		width: 60%;
 	
@@ -92,5 +95,8 @@ main {
 		position: relative;
 	}
 
+&.fade {
+	opacity: 0;
+}
 }
 

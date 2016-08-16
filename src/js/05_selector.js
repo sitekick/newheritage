@@ -3,7 +3,8 @@ function buildSelector(options, mode){
   	var op = `<div id="selector"><div class="wrapper">`;	
   	
   	for(var i = 0; i < options.length; i++) {
-  		op += `<div class="option"><canvas id="canvas-${i}" data-src="${options[i].image}"></div>`
+  		op += `<div class="option" tabindex="2"><canvas id="canvas-${i}" data-src="${options[i].image}"></div>`
+
   	}
   		
   	op += '</div></div>';
@@ -39,21 +40,45 @@ function buildSelector(options, mode){
 		
 	});
 		
+	//Events
+	//focus
+	var focus_options = document.querySelectorAll('.option');
+	
+	for(var i=0; i < focus_options.length; i++){
+			focus_options[i].addEventListener('focus', function (){
+				this.querySelector('.canvas-color').style.opacity = 1;
+			}, true);
+			focus_options[i].addEventListener('focusout', function (){
+				this.querySelector('.canvas-color').style.opacity = 0;
+			}, true);
+			focus_options[i].addEventListener('keydown', function (e){
+				 if(e.key == 'Enter'){
+				 	var target = this.querySelector('.canvas-color')
+				 	var params = {
+					 	targetEl : 'canvas',
+					 	data : options,
+					 	mode : mode,
+					 	method: 'tabbed'
+				 	}
+				 	_activateEvent(target, params);
+				 	}
+				});
+	};
+	
 	// Drag 
 	var callback = {
-		func : _clickEvent,
+		func : _activateEvent,
 		params : {
 			targetEl : 'canvas',
 			data : options,
-			mode : mode
+			mode : mode,
+			method : 'clicked'
 		}
 	};
 		
 	dragScroll('selector', (mode == 'desktop') ? true : false, callback);
 		
 }//buildSelector
-
-
 
 
 
@@ -110,7 +135,7 @@ function _readFileName(imagepath){
 }
 
 
-function _clickEvent(clicked, params){
+function _activateEvent(clicked, params){
 	
 	//receives target of click event object; check for proper type 
 	
@@ -136,6 +161,6 @@ function _clickEvent(clicked, params){
 	var selected = (options[cindex]);
 	
 	
-	buildModal(selected, params.mode);	
+	buildModal(selected, params.mode, params.method);	
 
 }

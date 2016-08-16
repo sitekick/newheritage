@@ -1,26 +1,19 @@
-function buildModal(data, mode){
+function buildModal(data, mode, method){
 		
-	selectorButtonToggle(data.name);
+	layoutToggle(data.name);
 		
-	var modal_props = _modalProperties();
-	var modal = '<div id="modal"><div class="wrapper">';
 	
+	var modal_props = _modalProperties();
+	
+	//resetLayout('!modal');
 	resetLayout('background');
 	hideSelector();
-		
-	if(mode == 'mobile'){
-		modal += `<div class="icons">&nbsp;</div><div class="info">
-		<section><h3>Location</h3><p>${data.title}</p></section>
-		<section><h3>Summary</h3><p>${data.summary}</p></section>
-		</div>`;
-	} else {
-		modal += `<div class="info"><div class="icons">&nbsp;</div>
-		<section><h3>Location</h3><p>${data.title}</p></section>
-		<section><h3>Summary</h3><p>${data.summary}</p></section>
-		</div>`;	
-	};
 	
-	modal += '</div></div>';
+	var modal = `<div id="modal" class="${method} ${mode}" tabindex="1"><div class="wrapper">	
+	<div class="controls" tabindex="1"><div class="icon"></div></div>
+	<div class="info"><section><h3>Location</h3><p>${data.title}</p></section>
+	<section><h3>Summary</h3><p>${data.summary}</p></section>
+	</div></div></div>`;
 		
 	$('body').append(modal);
 		
@@ -39,7 +32,7 @@ function buildModal(data, mode){
 			
 	}
 		
-	_modalEvents();
+	_modalEvents(method);
 }
 
 
@@ -113,11 +106,29 @@ function _modalProperties() {
 }
 	
 
-function _modalEvents(){
-	// Close Modal Button
-	$('#modal .icons').on('click', function(){
-		resetLayout('modal');
-		resetLayout('background');
-		$('#selector').css('display','block');
+function _modalEvents(method){
+	
+	var modal = document.getElementById('modal');
+	var button = modal.querySelector('.controls');
+	
+	if(method == 'tabbed') modal.focus();
+	
+	button.addEventListener('keydown', function (e){
+		if(e.key == 'Enter'){
+/*
+			resetLayout('!selector');
+			$('#selector').css('display','block');
+*/
+		layoutToggle();
+		}
 	});
+	button.addEventListener('click', function (e){
+/*
+		resetLayout('!selector');
+		$('#selector').css('display','block');
+*/
+	layoutToggle();
+	}, false);	
+	
+		
 }

@@ -11,7 +11,7 @@ var resizeQuery = (function () {
 				fireCallback(eventsobj,currentMQ);
 			}
 			
-			$(window).resize(function(){
+			window.onresize = function() {
 				var newMQ = idQuery();
 			
 				if(newMQ != tmpMQ){
@@ -23,9 +23,8 @@ var resizeQuery = (function () {
 					
 					tmpMQ = newMQ;
 				};
-				
-			});
-			
+			};
+
 		}
 		
 		function idQuery() {

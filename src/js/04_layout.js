@@ -3,13 +3,23 @@ function resetLayout(element) {
 	switch(element) {
 		case 'selector':
 			$('#selector').remove();
-				break;
+		break;
 		case 'modal' :
 			$('#modal').remove();
-			break;
+		break;
 		case 'background' :
 			$('#backcanvas').remove();
-			break;
+		break;
+		// !element remove all but element
+		case '!selector':
+			$('#modal').remove();
+			$('#backcanvas').remove();
+		break;
+		case '!modal':
+			$('#selector').remove();
+			$('#backcanvas').remove();
+		break;	
+			
 		default:
 			$('#selector').remove();
 			$('#modal').remove();
@@ -22,13 +32,20 @@ function hideSelector(){
 	$('#selector').css('display','none');
 }
 
-function selectorButtonToggle(text) {
-	//control button 
+function layoutToggle(text) {
+	 
 	var button = document.getElementById('selector_button');
-		
+	var selector = document.getElementById('selector');
+	var main = document.querySelector('main')	
+	
 	if(text){
 		button.innerText = text;
+		addClass(main, 'fade');
+		
 	} else {
-		button.css('display','none');
+		button.innerText = '';
+		removeClass(main, 'fade');
+		resetLayout('!selector');
+		selector.style.display = 'block';
 	}
 }

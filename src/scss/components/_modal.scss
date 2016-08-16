@@ -4,28 +4,14 @@
 	background: #FFF;
 	color: #9797A6;
 	left: 6em;
-/*
-	border: 4px solid #FFF; 
-	border-bottom: 0;
-	right: 6em;
-*/
 
 	> .wrapper {
 		position: relative;
 	}
 	
-	canvas {
-/*
-		opacity: 0;
-		transition-property: opacity;
-*/
-	}
-	
-	
-	
 	.info {
 		position: absolute;
-		z-index: 10;
+		z-index: 5;
 		right: 0; 
 		top: 0;
 		background: rgba(255,255,255, .9);
@@ -38,26 +24,41 @@
 		bottom: auto;
 	}
 	}
-		
-	.icons {
-		width: 30px; height: 30px;
-		float: right;
-		opacity: .5;
-		background: url(../img/icon.png) center center no-repeat;
-		cursor: pointer;
-		
-	&:hover {
-		opacity: 1;
-	}
 	
-	@include screen-small{
-		position: absolute;left: 0; top: 0;
-		float: none;
-		opacity: 1;
-		background-color: #FFF;
+	.controls {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		height: 32px;
+		position: absolute; right: -8px; top: -8px;z-index: 20;
+		
+		.icon {
+			width: 32px;
+			height: 100%;
+			border-radius: 100%;
+			border: 3px solid $white;
+			display: block;
+			background-color: $grey;
+			background-image: url(../img/icon/32x32.svg);
+			background-repeat: no-repeat;
+			background-position: -32px -32px;
+			background-size: 64px 96px;
+			cursor: pointer;
+			transition: background-color 1s;
+			
+		&:hover {
+			background-color: $black;
+		}
+		}
+	
+	&:focus{
+		
+		.icon{
+			background-color: $black;
+		}	
 	}	
 	}
-	
+		
 	section {
 		margin: 1em;
 			
@@ -70,6 +71,17 @@
 		}
 	}
 			
+&.mobile{
+	
+	.controls {
+		
+		.icon{
+		border-width: 2px;
+		}	
+	}
+}
+
+
 @include screen-small{
 	left: 1em;
 }
