@@ -1,6 +1,6 @@
 function buildSelector(options, mode){
 	
-  	var op = `<div id="selector" tabindex="0" class="ds-element ${(mode == 'desktop') ? 'ds-vertical ' : ' '}kf-group kf-noclick"><div class="wrapper">`;	
+  	var op = `<div id="selector" tabindex="0"><div class="wrapper">`;	
   	
   	for(var i = 0; i < options.length; i++) {
   		op += `<div class="option" tabindex="-1" role="button" aria-label="View"><canvas id="canvas-${i}" data-src="${options[i].image}"></div>`
@@ -42,8 +42,6 @@ function buildSelector(options, mode){
 		
 	//Events
 	
-	dragScroll();
-	keyFocus();
 	//keydown focused option
 	var focus_options = document.querySelectorAll('.option');
 	
@@ -71,28 +69,15 @@ function buildSelector(options, mode){
 					 	targetEl : 'canvas',
 					 	data : options,
 					 	mode : mode,
-					 	method: 'tabbed'
+					 	method: 'clicked'
 				 	}
 				 	_activateEvent(target, params);
 
 				}, true);
 	};
-	
-	// Drag 
-/*
-	var callback = {
-		func : _activateEvent,
-		params : {
-			targetEl : 'canvas',
-			data : options,
-			mode : mode,
-			method : 'clicked'
-		}
-	};
-		
-	dragScroll('selector', (mode == 'desktop') ? true : false, callback);
-*/
-		
+	 
+	keyFocus('#selector', false);
+	dragScroll('#selector', (mode == 'desktop') ? true : false);	
 }//buildSelector
 
 

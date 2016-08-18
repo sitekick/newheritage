@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700|Raleway:400,400i,600);
 body {
   margin: 0;
   padding: 0;
@@ -24,7 +25,7 @@ footer > .wrapper {
 }
 
 header {
-  margin-bottom: 2em;
+  margin-bottom: 0;
 }
 header > .wrapper {
   display: table;
@@ -103,19 +104,18 @@ main.fade {
 }
 
 body {
-  background: #EF4136;
+  background: #9797A6;
   color: #FFF;
   overflow: hidden;
+  font-family: "Raleway", sans-serif;
+  font-weight: 400;
+  line-height: 1.65em;
+}
+body.modal {
+  background: #EF4136;
 }
 
 /* =========== ANCHOR ============= */
-nav a {
-  text-decoration: none;
-}
-nav a.active {
-  color: #FFF;
-}
-
 /* =========== IMAGES ============= */
 img.autosize {
   max-width: 100%;
@@ -136,6 +136,8 @@ img.autosize {
 /* =========== HEADERS ============= */
 h1 {
   margin: 0 0 1em 0;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
 }
 
 nav ul {
@@ -151,19 +153,22 @@ nav ul {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  border: 1px solid #FFF;
+  background: #FFF;
 }
 nav ul li {
   -webkit-box-flex: 1;
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
+  padding: .25em 1em;
+  text-align: center;
 }
-nav ul li.active {
-  color: #FFF;
+nav ul li a {
+  color: #9797A6;
+  text-decoration: none;
 }
-@media screen and (max-width: 768px) {
-  nav ul li {
-    text-align: center;
-  }
+nav ul li a.active {
+  font-weight: 700;
 }
 @media screen and (max-width: 768px) {
   nav ul {

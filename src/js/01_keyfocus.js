@@ -1,37 +1,15 @@
-var keyFocus = (function () {
+var keyFocus = (function (id, clickEvent) {
 	
 	/* Handles event listeners on tab focused groups for WAI tabbing/keyboard compliance
-	* A) Parent element containing focusable children requires:
-	* 	1) attribute: tabindex="0"
-	* 	2) class: class="kf-group"
-	*	Option) class kf-noclick to prevent click event being fired on keydown
-	* B) Focusable children require:
-	*	1) attribute: tabindex="-1"
+	* A) Parent element containing requires tabindex="0" attribute
+	* B) Focusable children require tabindex="-1" attribute
+	* Option: clickEvent false to prevent keydown event listeners
 	*/ 
 	
-	var tabindexes = document.querySelectorAll('*[tabindex="0"]');
-	
-	var kf_groups = [];
-	
-	for(var i=0; i < tabindexes.length; i++){
-		
-		let kf_group = classCheck(tabindexes[i], 'kf-group');
-		
-		if(kf_group) {
-			let kf_noclick = classCheck(tabindexes[i], 'kf-noclick');
-			kf_groups[i] = new FocusGroup(tabindexes[i], kf_noclick);
-		}
-		
-	}
-	
-	function classCheck(el, classname) {
-		if(el.classList)
-			return el.classList.contains(classname);
-		else
-			return !!el.className.match(new RegExp('(\\s|^)' + classname + '(\\s|$)'));
-	}
-	
-	function FocusGroup(el, noclick) {
+	var el = document.querySelector(id);
+	var kf_group = new FocusGroup(el, clickEvent);
+			
+	function FocusGroup(el, clickEvent) {
 		
 		var thisObj = this;
 		
@@ -39,11 +17,11 @@ var keyFocus = (function () {
 		this.focusable = el.querySelectorAll('*[tabindex="-1"]');
 		this.focus_pos = 0;
 		this.focus_end = this.focusable.length - 1;
-		this.clickEvent = (noclick === true) ? false : true;
+		this.clickEvent = (clickEvent === false || clickEvent === undefined) ? false : true;
 		
 		this.el.addEventListener('focus', function(e) {
 			
-			return thisObj.elementFocus(e, this)
+			return thisObj.elementFocus(e, this);
 			
 			});
 		
@@ -51,7 +29,7 @@ var keyFocus = (function () {
 			
 			this.focusable[i].addEventListener('keydown', function(e) {
 				
-				return thisObj.childFocus(e, this)
+				return thisObj.childFocus(e, this);
 			
 			});
 

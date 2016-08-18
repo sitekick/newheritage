@@ -1,21 +1,7 @@
-var dragScroll = (function (){
+var dragScroll = (function (id, vertical){
 	
-	var draggables = document.querySelectorAll('.ds-element');
-	var ds_elements = [];
-	
-	for(var i = 0; i < draggables.length; i++){
-		
-		let ds_vertical = classCheck(draggables[i], 'ds-vertical');
-		
-		ds_elements[i] = new DragScroll(draggables[i], ds_vertical );
-	}
-	
-	function classCheck(el, classname) {
-		if(el.classList)
-			return el.classList.contains(classname);
-		else
-			return !!el.className.match(new RegExp('(\\s|^)' + classname + '(\\s|$)'));
-	}
+   	let el = document.querySelector(id);
+	let ds_element = new DragScroll(el, vertical);
 	
 	function DragScroll(el, vertical){
 		
@@ -63,6 +49,6 @@ var dragScroll = (function (){
 				//was scrolled so prevent bubbling mouseup
 				e.stopPropagation();
 			} 
-	}
+	};
 
 });

@@ -69,7 +69,6 @@ $(function () {
 		
 	}
 	
-// 	dragScroll();
 
-	
+	keyFocus('#nav');
 });

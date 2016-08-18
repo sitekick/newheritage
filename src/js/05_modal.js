@@ -108,7 +108,7 @@ function _modalEvents(method){
 	if(method == 'tabbed') modal.focus();
 	
 	button.addEventListener('keydown', function (e){
-		if(e.key == ' '){
+		if(e.key == ' ' || e.key == 'Enter'){
 			//prevent scroll to end of container
 			e.preventDefault();
 			layoutToggle();

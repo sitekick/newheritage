@@ -21,29 +21,13 @@ function removeClass(el, className) {
   }
 }
 
-
-
 /*! modernizr 3.3.1 (Custom Build) | MIT *
  * https://modernizr.com/download/?-flexbox-mq-setclasses !*/
 !function(e,n,t){function r(e,n){return typeof e===n}function o(){var e,n,t,o,s,i,a;for(var l in C)if(C.hasOwnProperty(l)){if(e=[],n=C[l],n.name&&(e.push(n.name.toLowerCase()),n.options&&n.options.aliases&&n.options.aliases.length))for(t=0;t<n.options.aliases.length;t++)e.push(n.options.aliases[t].toLowerCase());for(o=r(n.fn,"function")?n.fn():n.fn,s=0;s<e.length;s++)i=e[s],a=i.split("."),1===a.length?Modernizr[a[0]]=o:(!Modernizr[a[0]]||Modernizr[a[0]]instanceof Boolean||(Modernizr[a[0]]=new Boolean(Modernizr[a[0]])),Modernizr[a[0]][a[1]]=o),g.push((o?"":"no-")+a.join("-"))}}function s(e){var n=S.className,t=Modernizr._config.classPrefix||"";if(x&&(n=n.baseVal),Modernizr._config.enableJSClass){var r=new RegExp("(^|\\s)"+t+"no-js(\\s|$)");n=n.replace(r,"$1"+t+"js$2")}Modernizr._config.enableClasses&&(n+=" "+t+e.join(" "+t),x?S.className.baseVal=n:S.className=n)}function i(){return"function"!=typeof n.createElement?n.createElement(arguments[0]):x?n.createElementNS.call(n,"http://www.w3.org/2000/svg",arguments[0]):n.createElement.apply(n,arguments)}function a(){var e=n.body;return e||(e=i(x?"svg":"body"),e.fake=!0),e}function l(e,t,r,o){var s,l,f,u,d="modernizr",c=i("div"),p=a();if(parseInt(r,10))for(;r--;)f=i("div"),f.id=o?o[r]:d+(r+1),c.appendChild(f);return s=i("style"),s.type="text/css",s.id="s"+d,(p.fake?p:c).appendChild(s),p.appendChild(c),s.styleSheet?s.styleSheet.cssText=e:s.appendChild(n.createTextNode(e)),c.id=d,p.fake&&(p.style.background="",p.style.overflow="hidden",u=S.style.overflow,S.style.overflow="hidden",S.appendChild(p)),l=t(c,e),p.fake?(p.parentNode.removeChild(p),S.style.overflow=u,S.offsetHeight):c.parentNode.removeChild(c),!!l}function f(e,n){return!!~(""+e).indexOf(n)}function u(e){return e.replace(/([a-z])-([a-z])/g,function(e,n,t){return n+t.toUpperCase()}).replace(/^-/,"")}function d(e,n){return function(){return e.apply(n,arguments)}}function c(e,n,t){var o;for(var s in e)if(e[s]in n)return t===!1?e[s]:(o=n[e[s]],r(o,"function")?d(o,t||n):o);return!1}function p(e){return e.replace(/([A-Z])/g,function(e,n){return"-"+n.toLowerCase()}).replace(/^ms-/,"-ms-")}function m(n,r){var o=n.length;if("CSS"in e&&"supports"in e.CSS){for(;o--;)if(e.CSS.supports(p(n[o]),r))return!0;return!1}if("CSSSupportsRule"in e){for(var s=[];o--;)s.push("("+p(n[o])+":"+r+")");return s=s.join(" or "),l("@supports ("+s+") { #modernizr { position: absolute; } }",function(e){return"absolute"==getComputedStyle(e,null).position})}return t}function h(e,n,o,s){function a(){d&&(delete N.style,delete N.modElem)}if(s=r(s,"undefined")?!1:s,!r(o,"undefined")){var l=m(e,o);if(!r(l,"undefined"))return l}for(var d,c,p,h,v,y=["modernizr","tspan","samp"];!N.style&&y.length;)d=!0,N.modElem=i(y.shift()),N.style=N.modElem.style;for(p=e.length,c=0;p>c;c++)if(h=e[c],v=N.style[h],f(h,"-")&&(h=u(h)),N.style[h]!==t){if(s||r(o,"undefined"))return a(),"pfx"==n?h:!0;try{N.style[h]=o}catch(g){}if(N.style[h]!=v)return a(),"pfx"==n?h:!0}return a(),!1}function v(e,n,t,o,s){var i=e.charAt(0).toUpperCase()+e.slice(1),a=(e+" "+z.join(i+" ")+i).split(" ");return r(n,"string")||r(n,"undefined")?h(a,n,o,s):(a=(e+" "+E.join(i+" ")+i).split(" "),c(a,n,t))}function y(e,n,r){return v(e,t,t,n,r)}var g=[],C=[],w={_version:"3.3.1",_config:{classPrefix:"",enableClasses:!0,enableJSClass:!0,usePrefixes:!0},_q:[],on:function(e,n){var t=this;setTimeout(function(){n(t[e])},0)},addTest:function(e,n,t){C.push({name:e,fn:n,options:t})},addAsyncTest:function(e){C.push({name:null,fn:e})}},Modernizr=function(){};Modernizr.prototype=w,Modernizr=new Modernizr;var S=n.documentElement,x="svg"===S.nodeName.toLowerCase(),_=function(){var n=e.matchMedia||e.msMatchMedia;return n?function(e){var t=n(e);return t&&t.matches||!1}:function(n){var t=!1;return l("@media "+n+" { #modernizr { position: absolute; } }",function(n){t="absolute"==(e.getComputedStyle?e.getComputedStyle(n,null):n.currentStyle).position}),t}}();w.mq=_;var b="Moz O ms Webkit",z=w._config.usePrefixes?b.split(" "):[];w._cssomPrefixes=z;var E=w._config.usePrefixes?b.toLowerCase().split(" "):[];w._domPrefixes=E;var P={elem:i("modernizr")};Modernizr._q.push(function(){delete P.elem});var N={style:P.elem.style};Modernizr._q.unshift(function(){delete N.style}),w.testAllProps=v,w.testAllProps=y,Modernizr.addTest("flexbox",y("flexBasis","1px",!0)),o(),s(g),delete w.addTest,delete w.addAsyncTest;for(var T=0;T<Modernizr._q.length;T++)Modernizr._q[T]();e.Modernizr=Modernizr}(window,document);
-var dragScroll = (function (){
+var dragScroll = (function (id, vertical){
 	
-	var draggables = document.querySelectorAll('.ds-element');
-	var ds_elements = [];
-	
-	for(var i = 0; i < draggables.length; i++){
-		
-		let ds_vertical = classCheck(draggables[i], 'ds-vertical');
-		
-		ds_elements[i] = new DragScroll(draggables[i], ds_vertical );
-	}
-	
-	function classCheck(el, classname) {
-		if(el.classList)
-			return el.classList.contains(classname);
-		else
-			return !!el.className.match(new RegExp('(\\s|^)' + classname + '(\\s|$)'));
-	}
+   	let el = document.querySelector(id);
+	let ds_element = new DragScroll(el, vertical);
 	
 	function DragScroll(el, vertical){
 		
@@ -91,43 +75,21 @@ var dragScroll = (function (){
 				//was scrolled so prevent bubbling mouseup
 				e.stopPropagation();
 			} 
-	}
+	};
 
 });
-var keyFocus = (function () {
+var keyFocus = (function (id, clickEvent) {
 	
 	/* Handles event listeners on tab focused groups for WAI tabbing/keyboard compliance
-	* A) Parent element containing focusable children requires:
-	* 	1) attribute: tabindex="0"
-	* 	2) class: class="kf-group"
-	*	Option) class kf-noclick to prevent click event being fired on keydown
-	* B) Focusable children require:
-	*	1) attribute: tabindex="-1"
+	* A) Parent element containing requires tabindex="0" attribute
+	* B) Focusable children require tabindex="-1" attribute
+	* Option: clickEvent false to prevent keydown event listeners
 	*/ 
 	
-	var tabindexes = document.querySelectorAll('*[tabindex="0"]');
-	
-	var kf_groups = [];
-	
-	for(var i=0; i < tabindexes.length; i++){
-		
-		let kf_group = classCheck(tabindexes[i], 'kf-group');
-		
-		if(kf_group) {
-			let kf_noclick = classCheck(tabindexes[i], 'kf-noclick');
-			kf_groups[i] = new FocusGroup(tabindexes[i], kf_noclick);
-		}
-		
-	}
-	
-	function classCheck(el, classname) {
-		if(el.classList)
-			return el.classList.contains(classname);
-		else
-			return !!el.className.match(new RegExp('(\\s|^)' + classname + '(\\s|$)'));
-	}
-	
-	function FocusGroup(el, noclick) {
+	var el = document.querySelector(id);
+	var kf_group = new FocusGroup(el, clickEvent);
+			
+	function FocusGroup(el, clickEvent) {
 		
 		var thisObj = this;
 		
@@ -135,11 +97,11 @@ var keyFocus = (function () {
 		this.focusable = el.querySelectorAll('*[tabindex="-1"]');
 		this.focus_pos = 0;
 		this.focus_end = this.focusable.length - 1;
-		this.clickEvent = (noclick === true) ? false : true;
+		this.clickEvent = (clickEvent === false || clickEvent === undefined) ? false : true;
 		
 		this.el.addEventListener('focus', function(e) {
 			
-			return thisObj.elementFocus(e, this)
+			return thisObj.elementFocus(e, this);
 			
 			});
 		
@@ -147,7 +109,7 @@ var keyFocus = (function () {
 			
 			this.focusable[i].addEventListener('keydown', function(e) {
 				
-				return thisObj.childFocus(e, this)
+				return thisObj.childFocus(e, this);
 			
 			});
 
@@ -406,6 +368,7 @@ function layoutToggle(text) {
 	var button = document.getElementById('selector_button');
 	var selector = document.getElementById('selector');
 	var main = document.querySelector('main');	
+	var body = document.querySelector('body');	
 	var focus = selector.querySelector('.selected');
 	
 	if(text){
@@ -414,11 +377,12 @@ function layoutToggle(text) {
 		button.innerText = text;
 		addClass(main, 'fade');
 		selector.style.display = 'none';
-		
+		addClass(body, 'modal');
 	} else {
 		//selector state
 		button.style.display = 'none';
 		removeClass(main, 'fade');
+		removeClass(body, 'modal');
 		resetLayout('!selector');
 		selector.style.display = 'block';
 		focus.focus();
@@ -534,7 +498,7 @@ function _modalEvents(method){
 	if(method == 'tabbed') modal.focus();
 	
 	button.addEventListener('keydown', function (e){
-		if(e.key == ' '){
+		if(e.key == ' ' || e.key == 'Enter'){
 			//prevent scroll to end of container
 			e.preventDefault();
 			layoutToggle();
@@ -549,7 +513,7 @@ function _modalEvents(method){
 
 function buildSelector(options, mode){
 	
-  	var op = `<div id="selector" tabindex="0" class="ds-element ${(mode == 'desktop') ? 'ds-vertical ' : ' '}kf-group kf-noclick"><div class="wrapper">`;	
+  	var op = `<div id="selector" tabindex="0"><div class="wrapper">`;	
   	
   	for(var i = 0; i < options.length; i++) {
   		op += `<div class="option" tabindex="-1" role="button" aria-label="View"><canvas id="canvas-${i}" data-src="${options[i].image}"></div>`
@@ -591,8 +555,6 @@ function buildSelector(options, mode){
 		
 	//Events
 	
-	dragScroll();
-	keyFocus();
 	//keydown focused option
 	var focus_options = document.querySelectorAll('.option');
 	
@@ -620,28 +582,15 @@ function buildSelector(options, mode){
 					 	targetEl : 'canvas',
 					 	data : options,
 					 	mode : mode,
-					 	method: 'tabbed'
+					 	method: 'clicked'
 				 	}
 				 	_activateEvent(target, params);
 
 				}, true);
 	};
-	
-	// Drag 
-/*
-	var callback = {
-		func : _activateEvent,
-		params : {
-			targetEl : 'canvas',
-			data : options,
-			mode : mode,
-			method : 'clicked'
-		}
-	};
-		
-	dragScroll('selector', (mode == 'desktop') ? true : false, callback);
-*/
-		
+	 
+	keyFocus('#selector', false);
+	dragScroll('#selector', (mode == 'desktop') ? true : false);	
 }//buildSelector
 
 
@@ -800,7 +749,6 @@ $(function () {
 		
 	}
 	
-// 	dragScroll();
 
-	
+	keyFocus('#nav');
 });
