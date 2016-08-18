@@ -1,9 +1,9 @@
 function buildSelector(options, mode){
 	
-  	var op = `<div id="selector"><div class="wrapper">`;	
+  	var op = `<div id="selector" tabindex="0" class="ds-element ${(mode == 'desktop') ? 'ds-vertical ' : ' '}kf-group kf-noclick"><div class="wrapper">`;	
   	
   	for(var i = 0; i < options.length; i++) {
-  		op += `<div class="option" tabindex="2"><canvas id="canvas-${i}" data-src="${options[i].image}"></div>`
+  		op += `<div class="option" tabindex="-1" role="button" aria-label="View"><canvas id="canvas-${i}" data-src="${options[i].image}"></div>`
 
   	}
   		
@@ -41,18 +41,17 @@ function buildSelector(options, mode){
 	});
 		
 	//Events
-	//focus
+	
+	dragScroll();
+	keyFocus();
+	//keydown focused option
 	var focus_options = document.querySelectorAll('.option');
 	
 	for(var i=0; i < focus_options.length; i++){
-			focus_options[i].addEventListener('focus', function (){
-				this.querySelector('.canvas-color').style.opacity = 1;
-			}, true);
-			focus_options[i].addEventListener('focusout', function (){
-				this.querySelector('.canvas-color').style.opacity = 0;
-			}, true);
+			
 			focus_options[i].addEventListener('keydown', function (e){
-				 if(e.key == 'Enter'){
+				 //space key for buttons;
+				 if(e.key == ' ' || e.key == 'Enter'){
 				 	var target = this.querySelector('.canvas-color')
 				 	var params = {
 					 	targetEl : 'canvas',
@@ -62,10 +61,25 @@ function buildSelector(options, mode){
 				 	}
 				 	_activateEvent(target, params);
 				 	}
-				});
+				}, true);
+				
+			focus_options[i].addEventListener('mouseup', function (e){
+				 
+				 	var target = this.querySelector('.canvas-color')
+				 	//console.log(this);
+				 	var params = {
+					 	targetEl : 'canvas',
+					 	data : options,
+					 	mode : mode,
+					 	method: 'tabbed'
+				 	}
+				 	_activateEvent(target, params);
+
+				}, true);
 	};
 	
 	// Drag 
+/*
 	var callback = {
 		func : _activateEvent,
 		params : {
@@ -77,6 +91,7 @@ function buildSelector(options, mode){
 	};
 		
 	dragScroll('selector', (mode == 'desktop') ? true : false, callback);
+*/
 		
 }//buildSelector
 

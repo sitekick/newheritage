@@ -62,6 +62,14 @@ $(function () {
 	
 	function resizeComplete (){
 		buildSelector( appdata[active], viewport );
+		
+		//when modal present during resize - reset page copy
+		var main = document.querySelector('main');
+		if( hasClass(main, 'fade') ) removeClass(main, 'fade');
+		
 	}
+	
+// 	dragScroll();
 
-})
+	
+});

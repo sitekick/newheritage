@@ -59,7 +59,8 @@
 
 		}
 	
-	&:hover {
+	&:hover,
+	&:focus {
 		
 		.canvas-color{
 			opacity: 1;

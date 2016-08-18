@@ -28,44 +28,162 @@ function removeClass(el, className) {
 !function(e,n,t){function r(e,n){return typeof e===n}function o(){var e,n,t,o,s,i,a;for(var l in C)if(C.hasOwnProperty(l)){if(e=[],n=C[l],n.name&&(e.push(n.name.toLowerCase()),n.options&&n.options.aliases&&n.options.aliases.length))for(t=0;t<n.options.aliases.length;t++)e.push(n.options.aliases[t].toLowerCase());for(o=r(n.fn,"function")?n.fn():n.fn,s=0;s<e.length;s++)i=e[s],a=i.split("."),1===a.length?Modernizr[a[0]]=o:(!Modernizr[a[0]]||Modernizr[a[0]]instanceof Boolean||(Modernizr[a[0]]=new Boolean(Modernizr[a[0]])),Modernizr[a[0]][a[1]]=o),g.push((o?"":"no-")+a.join("-"))}}function s(e){var n=S.className,t=Modernizr._config.classPrefix||"";if(x&&(n=n.baseVal),Modernizr._config.enableJSClass){var r=new RegExp("(^|\\s)"+t+"no-js(\\s|$)");n=n.replace(r,"$1"+t+"js$2")}Modernizr._config.enableClasses&&(n+=" "+t+e.join(" "+t),x?S.className.baseVal=n:S.className=n)}function i(){return"function"!=typeof n.createElement?n.createElement(arguments[0]):x?n.createElementNS.call(n,"http://www.w3.org/2000/svg",arguments[0]):n.createElement.apply(n,arguments)}function a(){var e=n.body;return e||(e=i(x?"svg":"body"),e.fake=!0),e}function l(e,t,r,o){var s,l,f,u,d="modernizr",c=i("div"),p=a();if(parseInt(r,10))for(;r--;)f=i("div"),f.id=o?o[r]:d+(r+1),c.appendChild(f);return s=i("style"),s.type="text/css",s.id="s"+d,(p.fake?p:c).appendChild(s),p.appendChild(c),s.styleSheet?s.styleSheet.cssText=e:s.appendChild(n.createTextNode(e)),c.id=d,p.fake&&(p.style.background="",p.style.overflow="hidden",u=S.style.overflow,S.style.overflow="hidden",S.appendChild(p)),l=t(c,e),p.fake?(p.parentNode.removeChild(p),S.style.overflow=u,S.offsetHeight):c.parentNode.removeChild(c),!!l}function f(e,n){return!!~(""+e).indexOf(n)}function u(e){return e.replace(/([a-z])-([a-z])/g,function(e,n,t){return n+t.toUpperCase()}).replace(/^-/,"")}function d(e,n){return function(){return e.apply(n,arguments)}}function c(e,n,t){var o;for(var s in e)if(e[s]in n)return t===!1?e[s]:(o=n[e[s]],r(o,"function")?d(o,t||n):o);return!1}function p(e){return e.replace(/([A-Z])/g,function(e,n){return"-"+n.toLowerCase()}).replace(/^ms-/,"-ms-")}function m(n,r){var o=n.length;if("CSS"in e&&"supports"in e.CSS){for(;o--;)if(e.CSS.supports(p(n[o]),r))return!0;return!1}if("CSSSupportsRule"in e){for(var s=[];o--;)s.push("("+p(n[o])+":"+r+")");return s=s.join(" or "),l("@supports ("+s+") { #modernizr { position: absolute; } }",function(e){return"absolute"==getComputedStyle(e,null).position})}return t}function h(e,n,o,s){function a(){d&&(delete N.style,delete N.modElem)}if(s=r(s,"undefined")?!1:s,!r(o,"undefined")){var l=m(e,o);if(!r(l,"undefined"))return l}for(var d,c,p,h,v,y=["modernizr","tspan","samp"];!N.style&&y.length;)d=!0,N.modElem=i(y.shift()),N.style=N.modElem.style;for(p=e.length,c=0;p>c;c++)if(h=e[c],v=N.style[h],f(h,"-")&&(h=u(h)),N.style[h]!==t){if(s||r(o,"undefined"))return a(),"pfx"==n?h:!0;try{N.style[h]=o}catch(g){}if(N.style[h]!=v)return a(),"pfx"==n?h:!0}return a(),!1}function v(e,n,t,o,s){var i=e.charAt(0).toUpperCase()+e.slice(1),a=(e+" "+z.join(i+" ")+i).split(" ");return r(n,"string")||r(n,"undefined")?h(a,n,o,s):(a=(e+" "+E.join(i+" ")+i).split(" "),c(a,n,t))}function y(e,n,r){return v(e,t,t,n,r)}var g=[],C=[],w={_version:"3.3.1",_config:{classPrefix:"",enableClasses:!0,enableJSClass:!0,usePrefixes:!0},_q:[],on:function(e,n){var t=this;setTimeout(function(){n(t[e])},0)},addTest:function(e,n,t){C.push({name:e,fn:n,options:t})},addAsyncTest:function(e){C.push({name:null,fn:e})}},Modernizr=function(){};Modernizr.prototype=w,Modernizr=new Modernizr;var S=n.documentElement,x="svg"===S.nodeName.toLowerCase(),_=function(){var n=e.matchMedia||e.msMatchMedia;return n?function(e){var t=n(e);return t&&t.matches||!1}:function(n){var t=!1;return l("@media "+n+" { #modernizr { position: absolute; } }",function(n){t="absolute"==(e.getComputedStyle?e.getComputedStyle(n,null):n.currentStyle).position}),t}}();w.mq=_;var b="Moz O ms Webkit",z=w._config.usePrefixes?b.split(" "):[];w._cssomPrefixes=z;var E=w._config.usePrefixes?b.toLowerCase().split(" "):[];w._domPrefixes=E;var P={elem:i("modernizr")};Modernizr._q.push(function(){delete P.elem});var N={style:P.elem.style};Modernizr._q.unshift(function(){delete N.style}),w.testAllProps=v,w.testAllProps=y,Modernizr.addTest("flexbox",y("flexBasis","1px",!0)),o(),s(g),delete w.addTest,delete w.addAsyncTest;for(var T=0;T<Modernizr._q.length;T++)Modernizr._q[T]();e.Modernizr=Modernizr}(window,document);
 var dragScroll = (function (){
 	
-	var scrollElm = function (selector, mode, onClickObj) {
-		
-		var objpos,delta,dragging,mousestart;
-		var scrollobj = document.getElementById(selector);
-		var vertical = (mode === true || mode === undefined) ? true : false;
-		var scrollDir = (vertical == false) ? 'scrollLeft' : 'scrollTop';
-		
-		
-		scrollobj.addEventListener("mousedown", function (e) {
-			dragging = true;
-			mousestart = (vertical == false) ? e.clientX : e.clientY;
-			objpos = this[scrollDir];
-			
-		}, true);
+	var draggables = document.querySelectorAll('.ds-element');
+	var ds_elements = [];
 	
-		scrollobj.addEventListener("mousemove", function (e) {
-			delta = mousestart - ((vertical == false) ? e.clientX : e.clientY);
-			if(dragging === true){
-				this[scrollDir] = objpos + delta;
-			}
-		}, true);
+	for(var i = 0; i < draggables.length; i++){
 		
-		scrollobj.addEventListener("mouseup", function (e) {
-			dragging = false;
-			mousestart = (vertical == false) ? e.clientX : e.clientY;
-			
-			if(objpos == this[scrollDir]){
-				onClickObj.func.call(this, e.target, onClickObj.params)
-			}
-			
-		}, true);
+		let ds_vertical = classCheck(draggables[i], 'ds-vertical');
 		
+		ds_elements[i] = new DragScroll(draggables[i], ds_vertical );
+	}
+	
+	function classCheck(el, classname) {
+		if(el.classList)
+			return el.classList.contains(classname);
+		else
+			return !!el.className.match(new RegExp('(\\s|^)' + classname + '(\\s|$)'));
+	}
+	
+	function DragScroll(el, vertical){
+		
+		var thisObj = this;
+		this.el = el;
+		this.vertical = (vertical === true) ? true : false;
+		this.scrollDir = (this.vertical === false) ? 'scrollLeft' : 'scrollTop';
+		this.scrolling = {
+			dragging : false,
+			delta : undefined,
+			mouseStart : undefined,
+			objPos : undefined 
+		};
+		
+		this.el.addEventListener('mousedown', function(e){
+			return thisObj.scrollStart(e, this);
+		}, true)
+		this.el.addEventListener('mousemove', function(e){
+			return thisObj.scrollSet(e, this);
+		}, true)
+		this.el.addEventListener('mouseup', function(e){
+			return thisObj.scrollStop(e, this);
+		}, true)
+	}
+	
+	DragScroll.prototype.scrollStart = function (e, el) {
+		this.scrolling.dragging = true;
+		this.scrolling.mouseStart = (this.vertical === false) ? e.clientX : e.clientY;
+		this.scrolling.objPos = el[this.scrollDir];
+		
+	};
+	
+	DragScroll.prototype.scrollSet = function (e, el) {
+		this.scrolling.delta = this.scrolling.mouseStart - ((this.vertical === false) ? e.clientX : e.clientY);
+		if(this.scrolling.dragging === true){
+				el[this.scrollDir] = this.scrolling.objPos + this.scrolling.delta;
+			}	
+	};
+	
+	DragScroll.prototype.scrollStop = function (e, el) {
+		this.scrolling.dragging = false;
+		this.scrolling.mouseStart = (this.vertical === false) ? e.clientX : e.clientY;
+		//check to see if element was scrolled
+		if(this.scrolling.objPos != el[this.scrollDir]){
+				//was scrolled so prevent bubbling mouseup
+				e.stopPropagation();
+			} 
 	}
 
-	return scrollElm;
+});
+var keyFocus = (function () {
+	
+	/* Handles event listeners on tab focused groups for WAI tabbing/keyboard compliance
+	* A) Parent element containing focusable children requires:
+	* 	1) attribute: tabindex="0"
+	* 	2) class: class="kf-group"
+	*	Option) class kf-noclick to prevent click event being fired on keydown
+	* B) Focusable children require:
+	*	1) attribute: tabindex="-1"
+	*/ 
+	
+	var tabindexes = document.querySelectorAll('*[tabindex="0"]');
+	
+	var kf_groups = [];
+	
+	for(var i=0; i < tabindexes.length; i++){
+		
+		let kf_group = classCheck(tabindexes[i], 'kf-group');
+		
+		if(kf_group) {
+			let kf_noclick = classCheck(tabindexes[i], 'kf-noclick');
+			kf_groups[i] = new FocusGroup(tabindexes[i], kf_noclick);
+		}
+		
+	}
+	
+	function classCheck(el, classname) {
+		if(el.classList)
+			return el.classList.contains(classname);
+		else
+			return !!el.className.match(new RegExp('(\\s|^)' + classname + '(\\s|$)'));
+	}
+	
+	function FocusGroup(el, noclick) {
+		
+		var thisObj = this;
+		
+		this.el = el;
+		this.focusable = el.querySelectorAll('*[tabindex="-1"]');
+		this.focus_pos = 0;
+		this.focus_end = this.focusable.length - 1;
+		this.clickEvent = (noclick === true) ? false : true;
+		
+		this.el.addEventListener('focus', function(e) {
+			
+			return thisObj.elementFocus(e, this)
+			
+			});
+		
+		for(var i = 0; i <= this.focus_end; i++){
+			
+			this.focusable[i].addEventListener('keydown', function(e) {
+				
+				return thisObj.childFocus(e, this)
+			
+			});
 
+		};
+	};
+	
+	FocusGroup.prototype.elementFocus = function(e, el) {
+		//when parent element focused; switch to first focusable child
+		var first = this.focusable[this.focus_pos];
+		first.focus();
+		return false;
+		}
+		
+	FocusGroup.prototype.childFocus = function(e, el) {
+		
+		if(e.key == 'ArrowRight' || e.key == 'ArrowDown' ){
+			//act on arrow events
+			(this.focus_pos < this.focus_end ) ? this.focus_pos++ : this.focus_pos = 0;
+		} else if(e.key == 'ArrowLeft' || e.key == 'ArrowUp'){
+			(this.focus_pos > 0 ) ? this.focus_pos-- : this.focus_pos = this.focus_end;
+		} else if(e.key == ' ' || e.key == 'Enter' && (this.clickEvent === true) ) {
+			//act on spacebar and enter events
+			el.click();
+			return false;
+		} else {
+			//do nothing
+			return true;
+		}
+		
+		var next = this.focusable[this.focus_pos];
+		next.focus();
+		return false;
+		
+		}
 
-})();
+});
 var resizeQuery = (function () {
 	
 		var mQueries = ['(max-width: 768px)','(max-width: 1024px)','(min-width: 1024px) and (max-width: 1324px)','(min-width: 1324px)'];
@@ -266,7 +384,6 @@ function resetLayout(element) {
 		case 'background' :
 			$('#backcanvas').remove();
 		break;
-		// !element remove all but element
 		case '!selector':
 			$('#modal').remove();
 			$('#backcanvas').remove();
@@ -275,7 +392,7 @@ function resetLayout(element) {
 			$('#selector').remove();
 			$('#backcanvas').remove();
 		break;	
-			
+
 		default:
 			$('#selector').remove();
 			$('#modal').remove();
@@ -284,40 +401,36 @@ function resetLayout(element) {
 	}
 }
 	
-function hideSelector(){
-	$('#selector').css('display','none');
-}
-
 function layoutToggle(text) {
 	 
 	var button = document.getElementById('selector_button');
 	var selector = document.getElementById('selector');
-	var main = document.querySelector('main')	
+	var main = document.querySelector('main');	
+	var focus = selector.querySelector('.selected');
 	
 	if(text){
+		//modal state
+		button.style.display = 'block';
 		button.innerText = text;
 		addClass(main, 'fade');
+		selector.style.display = 'none';
 		
 	} else {
-		button.innerText = '';
+		//selector state
+		button.style.display = 'none';
 		removeClass(main, 'fade');
 		resetLayout('!selector');
 		selector.style.display = 'block';
+		focus.focus();
 	}
 }
 function buildModal(data, mode, method){
 		
 	layoutToggle(data.name);
 		
-	
 	var modal_props = _modalProperties();
-	
-	//resetLayout('!modal');
-	resetLayout('background');
-	hideSelector();
-	
 	var modal = `<div id="modal" class="${method} ${mode}" tabindex="1"><div class="wrapper">	
-	<div class="controls" tabindex="1"><div class="icon"></div></div>
+	<div class="controls" tabindex="1" role="button" aria-label="Close"><div class="icon" ></div></div>
 	<div class="info"><section><h3>Location</h3><p>${data.title}</p></section>
 	<section><h3>Summary</h3><p>${data.summary}</p></section>
 	</div></div></div>`;
@@ -421,20 +534,14 @@ function _modalEvents(method){
 	if(method == 'tabbed') modal.focus();
 	
 	button.addEventListener('keydown', function (e){
-		if(e.key == 'Enter'){
-/*
-			resetLayout('!selector');
-			$('#selector').css('display','block');
-*/
-		layoutToggle();
+		if(e.key == ' '){
+			//prevent scroll to end of container
+			e.preventDefault();
+			layoutToggle();
 		}
 	});
 	button.addEventListener('click', function (e){
-/*
-		resetLayout('!selector');
-		$('#selector').css('display','block');
-*/
-	layoutToggle();
+		layoutToggle();
 	}, false);	
 	
 		
@@ -442,10 +549,10 @@ function _modalEvents(method){
 
 function buildSelector(options, mode){
 	
-  	var op = `<div id="selector"><div class="wrapper">`;	
+  	var op = `<div id="selector" tabindex="0" class="ds-element ${(mode == 'desktop') ? 'ds-vertical ' : ' '}kf-group kf-noclick"><div class="wrapper">`;	
   	
   	for(var i = 0; i < options.length; i++) {
-  		op += `<div class="option" tabindex="2"><canvas id="canvas-${i}" data-src="${options[i].image}"></div>`
+  		op += `<div class="option" tabindex="-1" role="button" aria-label="View"><canvas id="canvas-${i}" data-src="${options[i].image}"></div>`
 
   	}
   		
@@ -483,18 +590,17 @@ function buildSelector(options, mode){
 	});
 		
 	//Events
-	//focus
+	
+	dragScroll();
+	keyFocus();
+	//keydown focused option
 	var focus_options = document.querySelectorAll('.option');
 	
 	for(var i=0; i < focus_options.length; i++){
-			focus_options[i].addEventListener('focus', function (){
-				this.querySelector('.canvas-color').style.opacity = 1;
-			}, true);
-			focus_options[i].addEventListener('focusout', function (){
-				this.querySelector('.canvas-color').style.opacity = 0;
-			}, true);
+			
 			focus_options[i].addEventListener('keydown', function (e){
-				 if(e.key == 'Enter'){
+				 //space key for buttons;
+				 if(e.key == ' ' || e.key == 'Enter'){
 				 	var target = this.querySelector('.canvas-color')
 				 	var params = {
 					 	targetEl : 'canvas',
@@ -504,10 +610,25 @@ function buildSelector(options, mode){
 				 	}
 				 	_activateEvent(target, params);
 				 	}
-				});
+				}, true);
+				
+			focus_options[i].addEventListener('mouseup', function (e){
+				 
+				 	var target = this.querySelector('.canvas-color')
+				 	//console.log(this);
+				 	var params = {
+					 	targetEl : 'canvas',
+					 	data : options,
+					 	mode : mode,
+					 	method: 'tabbed'
+				 	}
+				 	_activateEvent(target, params);
+
+				}, true);
 	};
 	
 	// Drag 
+/*
 	var callback = {
 		func : _activateEvent,
 		params : {
@@ -519,6 +640,7 @@ function buildSelector(options, mode){
 	};
 		
 	dragScroll('selector', (mode == 'desktop') ? true : false, callback);
+*/
 		
 }//buildSelector
 
@@ -671,6 +793,14 @@ $(function () {
 	
 	function resizeComplete (){
 		buildSelector( appdata[active], viewport );
+		
+		//when modal present during resize - reset page copy
+		var main = document.querySelector('main');
+		if( hasClass(main, 'fade') ) removeClass(main, 'fade');
+		
 	}
+	
+// 	dragScroll();
 
-})
+	
+});

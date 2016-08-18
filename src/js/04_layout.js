@@ -10,7 +10,6 @@ function resetLayout(element) {
 		case 'background' :
 			$('#backcanvas').remove();
 		break;
-		// !element remove all but element
 		case '!selector':
 			$('#modal').remove();
 			$('#backcanvas').remove();
@@ -19,7 +18,7 @@ function resetLayout(element) {
 			$('#selector').remove();
 			$('#backcanvas').remove();
 		break;	
-			
+
 		default:
 			$('#selector').remove();
 			$('#modal').remove();
@@ -28,24 +27,26 @@ function resetLayout(element) {
 	}
 }
 	
-function hideSelector(){
-	$('#selector').css('display','none');
-}
-
 function layoutToggle(text) {
 	 
 	var button = document.getElementById('selector_button');
 	var selector = document.getElementById('selector');
-	var main = document.querySelector('main')	
+	var main = document.querySelector('main');	
+	var focus = selector.querySelector('.selected');
 	
 	if(text){
+		//modal state
+		button.style.display = 'block';
 		button.innerText = text;
 		addClass(main, 'fade');
+		selector.style.display = 'none';
 		
 	} else {
-		button.innerText = '';
+		//selector state
+		button.style.display = 'none';
 		removeClass(main, 'fade');
 		resetLayout('!selector');
 		selector.style.display = 'block';
+		focus.focus();
 	}
 }

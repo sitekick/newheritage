@@ -2,15 +2,9 @@ function buildModal(data, mode, method){
 		
 	layoutToggle(data.name);
 		
-	
 	var modal_props = _modalProperties();
-	
-	//resetLayout('!modal');
-	resetLayout('background');
-	hideSelector();
-	
 	var modal = `<div id="modal" class="${method} ${mode}" tabindex="1"><div class="wrapper">	
-	<div class="controls" tabindex="1"><div class="icon"></div></div>
+	<div class="controls" tabindex="1" role="button" aria-label="Close"><div class="icon" ></div></div>
 	<div class="info"><section><h3>Location</h3><p>${data.title}</p></section>
 	<section><h3>Summary</h3><p>${data.summary}</p></section>
 	</div></div></div>`;
@@ -114,20 +108,14 @@ function _modalEvents(method){
 	if(method == 'tabbed') modal.focus();
 	
 	button.addEventListener('keydown', function (e){
-		if(e.key == 'Enter'){
-/*
-			resetLayout('!selector');
-			$('#selector').css('display','block');
-*/
-		layoutToggle();
+		if(e.key == ' '){
+			//prevent scroll to end of container
+			e.preventDefault();
+			layoutToggle();
 		}
 	});
 	button.addEventListener('click', function (e){
-/*
-		resetLayout('!selector');
-		$('#selector').css('display','block');
-*/
-	layoutToggle();
+		layoutToggle();
 	}, false);	
 	
 		

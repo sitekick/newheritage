@@ -232,7 +232,7 @@ nav ul li.active {
   -webkit-transition-duration: .35s;
           transition-duration: .35s;
 }
-#selector .option:hover .canvas-color {
+#selector .option:hover .canvas-color, #selector .option:focus .canvas-color {
   opacity: 1;
 }
 @media screen and (max-width: 768px) {
