@@ -1,32 +1,33 @@
+/* 05_modal.js */
+var contentScroll;
 function buildModal(data, mode, method){
-		
-	layoutToggle(data.name);
-		
+	
 	var modal_props = _modalProperties();
-	var modal = `<div id="modal" class="${method} ${mode}" tabindex="1"><div class="wrapper">	
-	<div class="controls" tabindex="1" role="button" aria-label="Close"><div class="icon" ></div></div>
-	<div class="info"><section><h3>Location</h3><p>${data.title}</p></section>
-	<section><h3>Summary</h3><p>${data.summary}</p></section>
+	var modal = `<div id="modal" class="${method} ${mode}" tabindex="0"><div class="wrapper">	
+	<div class="controls" tabindex="-1" role="button" aria-label="Close"><div class="icon" ></div></div>
+	<div class="info quadrant-${data.text.quadrant} ${data.text.color}"><section><h2>${data.name}</h2><h3>${data.title}</h3>
+	<p>${data.summary}</p></section>
 	</div></div></div>`;
 		
 	$('body').append(modal);
-		
+	
+	layoutToggle('modal', contentScroll);	
+	
 	if(mode == 'mobile'){
 		
-			$('#modal').css({ 'top' : modal_props.top, 'width' : modal_props.width });
+		$('#modal').css({'left' : modal_props.left,'top' : modal_props.top, 'width' : modal_props.width });
 			
-			_mobileImage(data.image);
+		_mobileImage(data.image);
 				
 	} else {
 			
-			$('#modal').css({'bottom' : 0, 'height' : modal_props.height, 'width' : modal_props.width });
-			$('#modal .info').css({'width' : modal_props.info.width});		
+		$('#modal').css({'left' : modal_props.left, 'top' : modal_props.top, 'height' : modal_props.height, 'width' : modal_props.width });
 			
-			_desktopImage(data.image);
+		_desktopImage(data.image);
 			
 	}
 		
-	_modalEvents(method);
+	_modalEvents(mode, method);
 }
 
 
@@ -49,7 +50,7 @@ function _desktopImage(srcImagePath){
 		
 	srcImage.onload = function () {
 		drawImageProp(backCtx,srcImage,0,0,vw,vh);
-		$('#content').prepend(backCanvas);
+		$('body').prepend(backCanvas);
  		vignetteCanvas(backCanvas);
  		tintImg(backCtx,vw,vh,'#9797A6');
 	}
@@ -87,36 +88,41 @@ function _modalProperties() {
 		
 	var main_offset = $('main > .wrapper').offset();
 	var height_header = $('header').height();
-		
+	
 	return {
 		'top' : height_header,
+		'left' : main_offset.left,
 		'width' : $(window).width() - ( main_offset.left * 2 ),
-		'height' : $(window).height() - $('header').height(),
-		'info' : {
-			'width' : $('.dropdown').width()
-		}
+ 		'height' : $(window).height() - $('header').height()
 	};
 		
 }
 	
 
-function _modalEvents(method){
+function _modalEvents(mode, method){
 	
 	var modal = document.getElementById('modal');
 	var button = modal.querySelector('.controls');
 	
-	if(method == 'tabbed') modal.focus();
+	//if(method == 'tabbed') button.focus();
 	
 	button.addEventListener('keydown', function (e){
 		if(e.key == ' ' || e.key == 'Enter'){
-			//prevent scroll to end of container
+			//prevent #selector scroll to end of container
 			e.preventDefault();
-			layoutToggle();
+			layoutToggle('selector', contentScroll);
 		}
 	});
+	
 	button.addEventListener('click', function (e){
-		layoutToggle();
+		layoutToggle('selector', contentScroll);
 	}, false);	
 	
-		
+	if(mode == 'desktop'){
+		setTimeout(
+    		function() {
+			var div = modal.querySelector('.info');
+			addClass(div, 'expand');
+    	}, 300);
+	}	
 }

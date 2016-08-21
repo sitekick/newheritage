@@ -1,22 +1,31 @@
+/* 10_functions.js */
 $(function () {
 	/* active: active main navigation
 		selected: selected item 
 	*/
 	var appdata, resizeid, selected, viewport;
 	var active = 'projects';
-
+	//@todo var contentScroll declared prior to modal function;
+	contentScroll = dragScroll('#content', true);
 	var events = {
 			'(max-width: 768px)' : function() { 
 					viewport = 'mobile';
+					contentScroll.disableDrag(true);
 			},
 			'(max-width: 1024px)' : function() { 
 					viewport = 'desktop';
+					contentScroll.enableDrag();
 			},
 			'(min-width: 1024px) and (max-width: 1324px)' : function() { 
 					viewport = 'desktop';
+					contentScroll.enableDrag();
 			},
 			'(min-width: 1324px)' : function() { 
 					viewport = 'desktop';
+					contentScroll.enableDrag();
+			},
+			'(all)' : function() {
+				
 			}
 		};
 		
@@ -43,6 +52,7 @@ $(function () {
 		
 		resetLayout('selector');
 		
+		if (active != 'contact') 
 		buildSelector( appdata[active], viewport );
 	});
 	
@@ -57,7 +67,7 @@ $(function () {
 	$(window).resize(function(){
 		resetLayout();
 		clearTimeout(resizeid);
-		resizeid = setTimeout(resizeComplete, 100);
+		resizeid = setTimeout(resizeComplete, 350);
 	});
 	
 	function resizeComplete (){
@@ -69,6 +79,18 @@ $(function () {
 		
 	}
 	
-
-	keyFocus('#nav');
+	
+	var a11y_nav = keyFocus('#nav');
+	
+	//listen for pertinent a11y keys; activate tab focus styles
+	var body = document.querySelector('body');
+	body.addEventListener('keydown', function (e) {	
+		if(e.key == 'Tab' || e.key == ' ' || e.key == 'Enter'){
+			var inputs = ['INPUT', 'SELECT', 'TEXTAREA'];
+			//active element is not an input; treat keydown as keyboard navigation event
+			if (inputs.indexOf(document.activeElement.tagName) != -1 === false) 
+				addClass(body, 'tabstyles');
+		}
+	})
+	
 });

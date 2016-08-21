@@ -1,3 +1,5 @@
+/* 01_dragScroll.js */
+
 var dragScroll = (function (id, vertical){
 	
    	let el = document.querySelector(id);
@@ -6,6 +8,7 @@ var dragScroll = (function (id, vertical){
 	function DragScroll(el, vertical){
 		
 		var thisObj = this;
+		this.active = true;
 		this.el = el;
 		this.vertical = (vertical === true) ? true : false;
 		this.scrollDir = (this.vertical === false) ? 'scrollLeft' : 'scrollTop';
@@ -28,10 +31,11 @@ var dragScroll = (function (id, vertical){
 	}
 	
 	DragScroll.prototype.scrollStart = function (e, el) {
-		this.scrolling.dragging = true;
-		this.scrolling.mouseStart = (this.vertical === false) ? e.clientX : e.clientY;
-		this.scrolling.objPos = el[this.scrollDir];
-		
+		if(this.active === true){
+			this.scrolling.dragging = true;
+			this.scrolling.mouseStart = (this.vertical === false) ? e.clientX : e.clientY;
+			this.scrolling.objPos = el[this.scrollDir];
+		}	
 	};
 	
 	DragScroll.prototype.scrollSet = function (e, el) {
@@ -50,5 +54,17 @@ var dragScroll = (function (id, vertical){
 				e.stopPropagation();
 			} 
 	};
-
+	
+	DragScroll.prototype.disableDrag = function (reset) {
+		this.active = false;
+		if(reset === true) {
+			this.el[this.scrollDir] = 0;
+		}
+	};
+	
+	DragScroll.prototype.enableDrag = function () {
+		this.active = true;
+	};
+	
+	return ds_element;
 });

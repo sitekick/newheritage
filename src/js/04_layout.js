@@ -1,3 +1,4 @@
+/* 04_layout.js */
 function resetLayout(element) {
 		
 	switch(element) {
@@ -27,28 +28,31 @@ function resetLayout(element) {
 	}
 }
 	
-function layoutToggle(text) {
+function layoutToggle(state, contentScroll) {
 	 
-	var button = document.getElementById('selector_button');
+	//pass contentScroll to disable #content scrolling when modal activated
 	var selector = document.getElementById('selector');
 	var main = document.querySelector('main');	
 	var body = document.querySelector('body');	
 	var focus = selector.querySelector('.selected');
+	var nav = document.querySelector('nav');
 	
-	if(text){
+	if(state == 'modal'){
 		//modal state
-		button.style.display = 'block';
-		button.innerText = text;
 		addClass(main, 'fade');
 		selector.style.display = 'none';
+		nav.style.display = 'none';
 		addClass(body, 'modal');
+		contentScroll.disableDrag(true);
+		var a11y_modal = keyFocus('#modal');
 	} else {
 		//selector state
-		button.style.display = 'none';
 		removeClass(main, 'fade');
 		removeClass(body, 'modal');
 		resetLayout('!selector');
 		selector.style.display = 'block';
+		nav.style.display = 'block';
+		contentScroll.enableDrag();
 		focus.focus();
 	}
 }

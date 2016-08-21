@@ -1,15 +1,25 @@
+html{
+	height: 100%;
+}
+
+
 body {
 	background: $grey;
 	color: $white;
-	overflow: hidden;
 	font-family: $raleway;
 	font-weight: 400;
 	line-height: 1.65em;
+	transition: background-color .5s;
+	overflow: hidden;
+	height: 100%;
 
 &.modal {
 	background: $orange;
 }
-
+@include screen-small{
+	overflow-y: scroll;
+	height: auto;
+}
 }
 /* =========== ANCHOR ============= */
 
@@ -23,9 +33,25 @@ a {
 	}
 }
 
+/* =========== FOCUS ============= */
 
+body{
+	
+	a:focus,
+	*[tabindex="0"],
+	*[tabindex="-1"]{
+		outline-width: 0;
+	}
 
+&.tabstyles{
 
+	a:focus,
+	*[tabindex="0"],
+	*[tabindex="-1"]{
+		outline-width: thick;
+	}
+}
+}
 
 /* =========== IMAGES ============= */
 
@@ -36,10 +62,13 @@ img {
 		height: auto;
 	}
 	.logo &{
-		
+		margin-top: .25em;	
+		margin-bottom: .5em;	
+	
 	@include screen-small{
-		margin:0 4em;
+		margin:0 2em;
 	}
+	
 	}
 }
 

@@ -1,9 +1,56 @@
 #content {
+	width: 70%;
+	height: inherit;
+	float: left;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	direction: rtl;
+	cursor: -webkit-grab;
 	
 	> .wrapper {
-		position: relative; 
+		position: relative;
+		direction: ltr;
 		z-index:10;
+		
 	}	
+
+body.modal & {
+	/* hide scrollbar when modal active */
+	/* overflow -> hidden has resize bug */
+	margin-left: -20px;
+	padding-left: 20px;
+}
+
+
+@include screen-small{
+	width: 100%;
+	float: none;
+	overflow: hidden;
+	direction: ltr;
+	cursor: default;
+}
+}
+
+#sidebar {
+// 	background: green;
+	width: 30%;
+	position: relative;
+	float: right;	
+	
+/*
+	.dropdown{
+		margin-top: 3em;
+			
+	@include screen-small{
+		position: relative; 
+	}
+	}
+*/
+
+@include screen-small{
+	width: 100%;
+	float: none;
+}
 }
 
 header,
@@ -24,27 +71,33 @@ header {
 	margin-bottom: 0;
 	
 	> .wrapper{
-		display: table;
-	
+// 		display: table;
+		
 		div {
-			display: table-cell;
+// 			display: table-cell;
 			
 			&.logo{
-				
+// 			height: 125px;
+/*
+			margin-top: .75em;	
+			margin-bottom: 1em;
+*/
 			
 			@include screen-full{
 				margin-right: 20em;
 			}
 			@include screen-large{
-				margin-right: 12em;
+				margin-right: 10em;
 			}
 			@include screen-medium{
-				margin-right: 8em;
+// 				margin-right: 8em;
 			}
 			@include screen-small{
 				margin-right:0;
 			}
 			}
+			
+/*
 			&.dropdown{
 				text-align: left;
 				width: 35%;
@@ -53,10 +106,11 @@ header {
 				position: relative; 
 			}
 			}
+*/
 		
 		@include screen-small{
-			display: block;
-			width: 100%;
+// 			display: block;
+// 			width: 100%;
 		}
 		}
 	
@@ -78,7 +132,8 @@ main {
 	transition: opacity .5s;
 	
 	.content {
-		width: 60%;
+// 		width: 60%;
+// 		width: 100%;
 	
 	&.people,
 	&.projects,
@@ -91,12 +146,11 @@ main {
 	}
 	}
 	
-	@include screen-small{
-		position: relative;
-	}
-
 &.fade {
 	opacity: 0;
+}
+@include screen-small{
+	position: relative;
 }
 }
 

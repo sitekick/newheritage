@@ -1,3 +1,5 @@
+/* 05_selector.js */
+
 function buildSelector(options, mode){
 	
   	var op = `<div id="selector" tabindex="0"><div class="wrapper">`;	
@@ -64,7 +66,7 @@ function buildSelector(options, mode){
 			focus_options[i].addEventListener('mouseup', function (e){
 				 
 				 	var target = this.querySelector('.canvas-color')
-				 	//console.log(this);
+				 	
 				 	var params = {
 					 	targetEl : 'canvas',
 					 	data : options,
@@ -76,18 +78,19 @@ function buildSelector(options, mode){
 				}, true);
 	};
 	 
-	keyFocus('#selector', false);
-	dragScroll('#selector', (mode == 'desktop') ? true : false);	
+	var a11y_selector = keyFocus('#selector', false);
+	var selectorScroll = dragScroll('#selector', (mode == 'desktop') ? true : false);
+	
 }//buildSelector
 
 
 
 function _selectorProperties(mode) {
 		
-	var dropdown_offset = $('div.dropdown').offset();
-	var dropdown_width = $('div.dropdown').width();
-	var props;
-		
+	//var sidebar_width = $('#sidebar').width();
+	
+	var sidebar = document.querySelector('#sidebar');
+	
 	if(mode == 'mobile'){
 		return {
 			element : 'main',
@@ -98,10 +101,13 @@ function _selectorProperties(mode) {
 		};
 	} else {
 		return {
-			element : 'body',
+// 			element : 'body',
+			element : '#sidebar',
 			top : 0,
-			left : Math.floor(dropdown_offset.left),
-			width : dropdown_width,
+// 			left : Math.floor(dropdown_offset.left),
+			left: 0,
+			//width : dropdown_width,
+			width : sidebar.scrollWidth,
 			height : $(window).height()
 		};
 	};
@@ -110,14 +116,17 @@ function _selectorProperties(mode) {
 	
 function _selectorCanvasProperties(dims, selector_obj, padding, mode) {
 		
+	let focus_outline_width = 10;
+	
 	if (mode == 'mobile'){
 		return  {
 			width : canvasDimension(dims, 'width', selector_obj.height - (padding * 2)),
-			height : selector_obj.height - (padding * 2)
+			height : selector_obj.height - ( (padding * 2) + focus_outline_width)
 		};	
 	} else {
 		return   {
-			width : selector_obj.width - (padding * 2),
+// 			width : selector_obj.width - (padding * 2),
+			width : selector_obj.width - ( (padding * 2) + focus_outline_width ),
 			height : canvasDimension(dims, 'height', selector_obj.width - (padding * 2))
 		};
 	};

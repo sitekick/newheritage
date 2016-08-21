@@ -4,9 +4,55 @@ body {
   padding: 0;
 }
 
+#content {
+  width: 70%;
+  height: inherit;
+  float: left;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  direction: rtl;
+  cursor: -webkit-grab;
+}
 #content > .wrapper {
   position: relative;
+  direction: ltr;
   z-index: 10;
+}
+body.modal #content {
+  /* hide scrollbar when modal active */
+  /* overflow -> hidden has resize bug */
+  margin-left: -20px;
+  padding-left: 20px;
+}
+@media screen and (max-width: 768px) {
+  #content {
+    width: 100%;
+    float: none;
+    overflow: hidden;
+    direction: ltr;
+    cursor: default;
+  }
+}
+
+#sidebar {
+  width: 30%;
+  position: relative;
+  float: right;
+  /*
+  	.dropdown{
+  		margin-top: 3em;
+  			
+  	@include screen-small{
+  		position: relative; 
+  	}
+  	}
+  */
+}
+@media screen and (max-width: 768px) {
+  #sidebar {
+    width: 100%;
+    float: none;
+  }
 }
 
 header > .wrapper,
@@ -27,11 +73,23 @@ footer > .wrapper {
 header {
   margin-bottom: 0;
 }
-header > .wrapper {
-  display: table;
-}
 header > .wrapper div {
-  display: table-cell;
+  /*
+  			&.dropdown{
+  				text-align: left;
+  				width: 35%;
+  			
+  			@include screen-small{
+  				position: relative; 
+  			}
+  			}
+  */
+}
+header > .wrapper div.logo {
+  /*
+  			margin-top: .75em;	
+  			margin-bottom: 1em;
+  */
 }
 @media screen and (min-width: 1324px) {
   header > .wrapper div.logo {
@@ -40,32 +98,12 @@ header > .wrapper div {
 }
 @media screen and (min-width: 1024px) and (max-width: 1324px) {
   header > .wrapper div.logo {
-    margin-right: 12em;
-  }
-}
-@media screen and (max-width: 1024px) {
-  header > .wrapper div.logo {
-    margin-right: 8em;
+    margin-right: 10em;
   }
 }
 @media screen and (max-width: 768px) {
   header > .wrapper div.logo {
     margin-right: 0;
-  }
-}
-header > .wrapper div.dropdown {
-  text-align: left;
-  width: 35%;
-}
-@media screen and (max-width: 768px) {
-  header > .wrapper div.dropdown {
-    position: relative;
-  }
-}
-@media screen and (max-width: 768px) {
-  header > .wrapper div {
-    display: block;
-    width: 100%;
   }
 }
 @media screen and (max-width: 768px) {
@@ -83,9 +121,6 @@ main {
   -webkit-transition: opacity .5s;
   transition: opacity .5s;
 }
-main .content {
-  width: 60%;
-}
 main .content.people, main .content.projects, main .content.contact {
   display: none;
 }
@@ -94,36 +129,65 @@ main .content.people, main .content.projects, main .content.contact {
     width: auto;
   }
 }
+main.fade {
+  opacity: 0;
+}
 @media screen and (max-width: 768px) {
   main {
     position: relative;
   }
 }
-main.fade {
-  opacity: 0;
+
+html {
+  height: 100%;
 }
 
 body {
   background: #9797A6;
   color: #FFF;
-  overflow: hidden;
   font-family: "Raleway", sans-serif;
   font-weight: 400;
   line-height: 1.65em;
+  -webkit-transition: background-color .5s;
+  transition: background-color .5s;
+  overflow: hidden;
+  height: 100%;
 }
 body.modal {
   background: #EF4136;
 }
+@media screen and (max-width: 768px) {
+  body {
+    overflow-y: scroll;
+    height: auto;
+  }
+}
 
 /* =========== ANCHOR ============= */
+/* =========== FOCUS ============= */
+body a:focus,
+body *[tabindex="0"],
+body *[tabindex="-1"] {
+  outline-width: 0;
+}
+body.tabstyles a:focus,
+body.tabstyles *[tabindex="0"],
+body.tabstyles *[tabindex="-1"] {
+  outline-width: thick;
+}
+
 /* =========== IMAGES ============= */
 img.autosize {
   max-width: 100%;
   height: auto;
 }
+.logo img {
+  margin-top: .25em;
+  margin-bottom: .5em;
+}
 @media screen and (max-width: 768px) {
   .logo img {
-    margin: 0 4em;
+    margin: 0 2em;
   }
 }
 
@@ -141,7 +205,6 @@ h1 {
 }
 
 nav ul {
-  width: 60%;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -153,22 +216,29 @@ nav ul {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  border: 1px solid #FFF;
   background: #FFF;
 }
 nav ul li {
   -webkit-box-flex: 1;
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
-  padding: .25em 1em;
   text-align: center;
+  letter-spacing: .05em;
 }
 nav ul li a {
+  display: block;
+  padding: .2em 0;
   color: #9797A6;
   text-decoration: none;
+  border-right: 6px solid #9797A6;
+  /*
+  				border-top: 3px solid white;
+  				border-bottom: 3px solid white;
+  */
 }
 nav ul li a.active {
-  font-weight: 700;
+  background: #EF4136;
+  color: #FFF;
 }
 @media screen and (max-width: 768px) {
   nav ul {
@@ -200,7 +270,7 @@ nav ul li a.active {
 
 #selector {
   background: #FFF;
-  position: fixed;
+  position: absolute;
   top: 0;
   z-index: 100;
   overflow-y: scroll;
@@ -231,7 +301,7 @@ nav ul li a.active {
 }
 #selector .option .canvas-color {
   position: absolute;
-  opacity: 0;
+  opacity: .35;
   -webkit-transition-property: opacity;
   transition-property: opacity;
   -webkit-transition-duration: .35s;
@@ -258,26 +328,70 @@ nav ul li a.active {
   position: absolute;
   z-index: 10;
   background: #FFF;
-  color: #9797A6;
-  left: 6em;
 }
 #modal > .wrapper {
   position: relative;
 }
 #modal .info {
+  font-weight: 400;
+  line-height: 1.4em;
   position: absolute;
   z-index: 5;
-  right: 0;
-  top: 0;
-  background: rgba(255, 255, 255, 0.9);
-  height: 100%;
+  background-color: #9797A6;
+  background-color: rgba(151, 151, 166, 0.9);
+  color: #FFF;
+  padding: 0;
+  width: 0;
+  opacity: 0;
+  height: 0;
+  -webkit-transition: width .35s ,height, .15s, opacity .5s;
+  transition: width .35s ,height, .15s, opacity .5s;
+  vertical-align: bottom;
+}
+#modal .info h2,
+#modal .info h3,
+#modal .info p {
+  margin: 10px;
+  margin-top: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+}
+#modal .info h2 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  margin-bottom: .25em;
+}
+#modal .info h3 {
+  margin-top: 0;
+  font-weight: 400;
+}
+#modal .info.expand {
+  height: auto;
+  width: 40%;
+  opacity: 1;
+}
+@media screen and (max-width: 1024px) {
+  #modal .info.expand {
+    width: auto;
+    width: -webkit-calc(100% - 8px);
+    width: calc(100% - 8px);
+  }
 }
 @media screen and (max-width: 768px) {
   #modal .info {
     position: relative;
-    right: auto;
     top: auto;
-    bottom: auto;
+    left: auto;
+    right: auto;
+    background-color: #FFF;
+    color: #9797A6;
+    width: auto;
+    height: auto;
+    text-shadow: none;
+    opacity: 1;
+    -webkit-transition-property: none;
+    transition-property: none;
   }
 }
 #modal .controls {
@@ -308,59 +422,55 @@ nav ul li a.active {
 #modal .controls .icon:hover {
   background-color: #000;
 }
+@media screen and (max-width: 768px) {
+  #modal .controls .icon {
+    border-width: 2px;
+  }
+}
 #modal .controls:focus .icon {
   background-color: #000;
 }
-#modal section {
-  margin: 1em;
+#modal.mobile .info.quadrant-1, #modal.mobile .info.quadrant-2, #modal.mobile .info.quadrant-3, #modal.mobile .info.quadrant-4 {
+  left: auto;
+  top: auto;
+  right: auto;
+  bottom: auto;
 }
-#modal section h3 {
-  margin: 1em 0 .5em 0;
+#modal.desktop .info.quadrant-1 {
+  left: 4px;
+  top: 4px;
 }
-#modal section p {
-  margin: 0 0 1em 0;
-}
-#modal.mobile .controls .icon {
-  border-width: 2px;
-}
-@media screen and (max-width: 768px) {
-  #modal {
-    left: 1em;
+@media screen and (max-width: 1024px) {
+  #modal.desktop .info.quadrant-1 {
+    top: auto;
+    bottom: 4px;
   }
 }
-
-header > .wrapper {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-flow: row nowrap;
-      flex-flow: row nowrap;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+#modal.desktop .info.quadrant-2 {
+  right: 4px;
+  top: 4px;
 }
-header > .wrapper div.logo {
-  -webkit-box-flex: 1;
-      -ms-flex: 1 1 auto;
-          flex: 1 1 auto;
-}
-header > .wrapper div.dropdown {
-  -webkit-box-flex: 0;
-      -ms-flex: 0 0 35%;
-          flex: 0 0 35%;
-  width: auto;
-}
-@media screen and (max-width: 768px) {
-  header > .wrapper div.dropdown {
-    -webkit-box-flex: 1;
-        -ms-flex: 1 1 auto;
-            flex: 1 1 auto;
+@media screen and (max-width: 1024px) {
+  #modal.desktop .info.quadrant-2 {
+    top: auto;
+    right: auto;
+    bottom: 4px;
+    left: 4px;
   }
 }
-@media screen and (max-width: 768px) {
-  header > .wrapper {
-    -ms-flex-flow: column;
-        flex-flow: column;
+#modal.desktop .info.quadrant-3 {
+  left: 4px;
+  bottom: 4px;
+}
+#modal.desktop .info.quadrant-4 {
+  right: 4px;
+  bottom: 4px;
+}
+@media screen and (max-width: 1024px) {
+  #modal.desktop .info.quadrant-4 {
+    right: auto;
+    bottom: 4px;
+    left: 4px;
   }
 }
 
