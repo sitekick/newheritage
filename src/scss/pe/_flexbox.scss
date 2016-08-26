@@ -23,3 +23,17 @@ header {
 	}
 	}
 }	
+
+nav {
+	
+	ul{
+		display: flex;
+		flex-flow: row nowrap;
+		align-items: center;
+		
+		li{
+			flex: 1 1 auto;
+		}
+	
+	}
+}

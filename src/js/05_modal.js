@@ -1,5 +1,5 @@
 /* 05_modal.js */
-var contentScroll;
+
 function buildModal(data, mode, method){
 	
 	var modal_props = _modalProperties();
@@ -11,7 +11,7 @@ function buildModal(data, mode, method){
 		
 	$('body').append(modal);
 	
-	layoutToggle('modal', contentScroll);	
+	layoutControl.selectorState(false);
 	
 	if(mode == 'mobile'){
 		
@@ -51,32 +51,52 @@ function _desktopImage(srcImagePath){
 	srcImage.onload = function () {
 		drawImageProp(backCtx,srcImage,0,0,vw,vh);
 		$('body').prepend(backCanvas);
- 		vignetteCanvas(backCanvas);
- 		tintImg(backCtx,vw,vh,'#9797A6');
+ 		vignetteImage(backCanvas);
+ 		tintImage(backCtx,vw,vh,239,65,54);
 	}
 			
 	srcImage.src = srcImagePath;
 		
 }
 
+function vignetteImage(canvas){
+		
+	//apply sized/cropped background image to modal window
+		
+	var vignetteCanvas = document.createElement('canvas');
+	var vignetteContext = vignetteCanvas.getContext('2d');
+	var modal_offset = $('#modal .wrapper').offset();
+	
+	var offx = modal_offset.left;
+	var offy = modal_offset.top;
+	var cw = $('#modal').width();
+	var ch = $('#modal').height();
+		
+	vignetteCanvas.id = 'vignette';
+	vignetteCanvas.width = cw;
+	vignetteCanvas.height = ch;
+	vignetteContext.drawImage(canvas,offx,offy,cw,ch,0,0,cw,ch );		
+		$('#modal .wrapper').append(vignetteCanvas);
+}
+
+
 function _mobileImage(srcImagePath) {
 		
 	if(typeof(srcImagePath) == 'undefined') return;
 		
-	var mobileCanvas = document.createElement('canvas');
-	var mobileCtx = mobileCanvas.getContext('2d');
+	let mobileCanvas = document.createElement('canvas');
+	let mobileCtx = mobileCanvas.getContext('2d');
 	
-	var srcImage = new Image();
-	var border = 2;
-	var dims = _readFileName(srcImagePath);
-	var cw = $('#modal .wrapper').width();
-	var ch = canvasDimension(dims, 'height', cw);
+	let srcImage = new Image();
+	let dims = _readFileName(srcImagePath);
+	let cw = $('#modal .wrapper').width();
+	let ch = canvasDimension(dims, 'height', cw);
 	mobileCanvas.width = cw;
 	mobileCanvas.height = ch;
 	mobileCanvas.id = 'mobilecanvas';
 		
 	srcImage.onload = function(){
-		mobileCtx.drawImage(srcImage,border,border,cw-(border*2),ch-(border*2));
+		mobileCtx.drawImage(srcImage,0,0,cw,ch);
 	}
 	
 	srcImage.src = srcImagePath;
@@ -104,24 +124,22 @@ function _modalEvents(mode, method){
 	var modal = document.getElementById('modal');
 	var button = modal.querySelector('.controls');
 	
-	//if(method == 'tabbed') button.focus();
-	
 	button.addEventListener('keydown', function (e){
 		if(e.key == ' ' || e.key == 'Enter'){
 			//prevent #selector scroll to end of container
 			e.preventDefault();
-			layoutToggle('selector', contentScroll);
+			layoutControl.selectorState(true);
 		}
-	});
+	}, false);
 	
 	button.addEventListener('click', function (e){
-		layoutToggle('selector', contentScroll);
+		layoutControl.selectorState(true);
 	}, false);	
 	
 	if(mode == 'desktop'){
 		setTimeout(
     		function() {
-			var div = modal.querySelector('.info');
+			let div = modal.querySelector('.info');
 			addClass(div, 'expand');
     	}, 300);
 	}	

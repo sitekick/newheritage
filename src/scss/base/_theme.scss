@@ -9,7 +9,7 @@ body {
 	font-family: $raleway;
 	font-weight: 400;
 	line-height: 1.65em;
-	transition: background-color .5s;
+	transition: background-color .25s;
 	overflow: hidden;
 	height: 100%;
 
@@ -38,17 +38,21 @@ a {
 body{
 	
 	a:focus,
-	*[tabindex="0"],
-	*[tabindex="-1"]{
+	*[tabindex="0"]:focus,
+	*[tabindex="-1"]:focus{
 		outline-width: 0;
+// 		outline: #00FF00 dotted thin;
+// 		outline: none;
 	}
 
 &.tabstyles{
 
 	a:focus,
-	*[tabindex="0"],
-	*[tabindex="-1"]{
+	*[tabindex="0"]:focus,
+	*[tabindex="-1"]:focus{
 		outline-width: thick;
+// 		outline: initial;
+		//outline: #00FF00 dotted thick;
 	}
 }
 }
@@ -74,13 +78,20 @@ img {
 
 /* =========== ELEMENTS ============= */
 
-#backcanvas {
-	position: absolute;
-	opacity: .15;
+
+footer {
+	
+	p{
+		margin: 0;
+	}
 }
 
-.content {
-// 	background: $black;
+
+blockquote{
+	border-left: 5px solid white;
+	padding-left: 3em;
+	font-family: $montserrat;
+	margin: 2em 0 2em 2em;
 }
 /* =========== HEADERS ============= */
 
@@ -88,4 +99,56 @@ h1 {
 	margin: 0 0 1em 0;
 	font-family: $montserrat;
 	font-weight: 400;
+}
+
+
+/* =========== FORM ============= */
+form {
+	font-family: $raleway;
+	font-size: 1em;
+}
+
+label {
+	display: inline-block;
+	vertical-align: top;
+	width: 150px;
+	font-weight: 600;
+	text-indent: .5em;
+	
+&[for="phone"]{
+// 	border: 1px solid red;
+}
+}
+
+input {
+	font-size: inherit;
+	font-family: inherit;
+	color: $grey;
+
+&:focus{
+	background: $orange;
+	color: $white;
+}
+
+
+&[type="text"],
+&[type="tel"],
+&[type="email"]{
+	width: 250px;
+	padding: .25em;
+}
+
+}
+
+textarea{
+	color: $grey;
+	font-size: inherit;
+	font-family: inherit;
+	width: 250px;
+	padding: .25em;
+
+&:focus{
+	background: $orange;
+	color: $white;
+}
 }

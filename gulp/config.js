@@ -14,8 +14,11 @@ module.exports = {
 		dest : dist + dev + 'assets/img'
 	},
 	scripts : {
-		src : 	[src + 'js/**/*.js', '!' + src + 'js/arch','!' + src + 'js/arch/**/*'],
-		dest : dist + dev + 'assets/js'
+		dest : dist + dev + 'assets/js',
+		src: {
+			build : [src + 'js/vendor/*.js',src + 'js/*.js', '!' + src + 'js/arch','!' + src + 'js/arch/**/*'],
+			test : [src + 'js/vendor/*.js', src + 'js/dist/*.js']
+			}
 	},
 	sass : {
 		src : src + 'scss/**/*.scss',
@@ -35,6 +38,10 @@ module.exports = {
 	wiredep : {
 		src : dist + dev,
 		index : 'index.html'
+	},
+	babel : {
+		src:  src + 'js/*.js',
+		dest: src + 'js/dist'
 	}
 };
 

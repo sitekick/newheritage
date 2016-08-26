@@ -14,6 +14,13 @@ gulp.task('build', function() {
   	'watch',
   	'serve'
   	);
+ });
+
+/* Testing runs scripts through babel before concat; no watching*/
+gulp.task('test', function() {
+  runSequence(
+  	['data','images','transpile'],
+  	['scripts-testing','sass'],
+  	'serve'
+  	);
   });
-  
- //gulp.task('build', ['data','images','transpile','scripts','sass','watch','serve']);

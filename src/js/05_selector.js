@@ -1,12 +1,20 @@
 /* 05_selector.js */
 
 function buildSelector(options, mode){
-	
+
+  	/* if existing; remove */
+  	{	
+	  	let clear = document.querySelector('#selector');
+	  	if(clear != null){
+	  		let parent = clear.parentNode;
+	  		parent.removeChild(clear);
+  		}
+  	}
+  	  	
   	var op = `<div id="selector" tabindex="0"><div class="wrapper">`;	
   	
-  	for(var i = 0; i < options.length; i++) {
+  	for(let i = 0; i < options.length; i++) {
   		op += `<div class="option" tabindex="-1" role="button" aria-label="View"><canvas id="canvas-${i}" data-src="${options[i].image}"></div>`
-
   	}
   		
   	op += '</div></div>';
@@ -14,28 +22,27 @@ function buildSelector(options, mode){
 	var selector_props = _selectorProperties(mode);
 		
 	$(selector_props.element).prepend(op);
-	var sh = selector_props.height;
-	var sw = selector_props.width;
-	$('#selector').height(sh).width(sw).css({'left' : selector_props.left});
+	
+	$('#selector').height(selector_props.height).width(selector_props.width);
 		
 	var canvases = $('#selector canvas');
 
 	$.each(canvases, function(key, value){
 			
-		var img_src = $(value).attr('data-src');
-		var context = value.getContext('2d');
-		var img = new Image();
- 		var dims = _readFileName(img_src);
- 		var canvas_props = _selectorCanvasProperties(dims, selector_props, 10, mode);
+		let img_src = $(value).attr('data-src');
+		let context = value.getContext('2d');
+		let img = new Image();
+ 		let dims = _readFileName(img_src);
+ 		let canvas_props = _selectorCanvasProperties(dims, selector_props, 10, mode);
 
  		value.width = canvas_props.width;
  		value.height = canvas_props.height;
 			
 		img.onload = function () {
 			context.drawImage(img,0,0,canvas_props.width,canvas_props.height);
-			var color = canvasClone(value);
+			let color = canvasClone(value);
 			$(value).parent().prepend(color) 
-			tintImg(context,canvas_props.width,canvas_props.height,'#9797A6');
+			grayscaleImg(context,canvas_props.width,canvas_props.height);
 		}
 			
 		img.src = img_src;
@@ -47,13 +54,13 @@ function buildSelector(options, mode){
 	//keydown focused option
 	var focus_options = document.querySelectorAll('.option');
 	
-	for(var i=0; i < focus_options.length; i++){
+	for(let i=0; i < focus_options.length; i++){
 			
 			focus_options[i].addEventListener('keydown', function (e){
 				 //space key for buttons;
 				 if(e.key == ' ' || e.key == 'Enter'){
-				 	var target = this.querySelector('.canvas-color')
-				 	var params = {
+				 	let target = this.querySelector('.canvas-color')
+				 	let params = {
 					 	targetEl : 'canvas',
 					 	data : options,
 					 	mode : mode,
@@ -65,9 +72,9 @@ function buildSelector(options, mode){
 				
 			focus_options[i].addEventListener('mouseup', function (e){
 				 
-				 	var target = this.querySelector('.canvas-color')
+				 	let target = this.querySelector('.canvas-color')
 				 	
-				 	var params = {
+				 	let params = {
 					 	targetEl : 'canvas',
 					 	data : options,
 					 	mode : mode,
@@ -87,26 +94,17 @@ function buildSelector(options, mode){
 
 function _selectorProperties(mode) {
 		
-	//var sidebar_width = $('#sidebar').width();
-	
-	var sidebar = document.querySelector('#sidebar');
+	let sidebar = document.querySelector('#sidebar');
 	
 	if(mode == 'mobile'){
 		return {
 			element : 'main',
-			top : 0,
-			left : 0,
 			width : $(window).width(),
 			height : 175
 		};
 	} else {
 		return {
-// 			element : 'body',
 			element : '#sidebar',
-			top : 0,
-// 			left : Math.floor(dropdown_offset.left),
-			left: 0,
-			//width : dropdown_width,
 			width : sidebar.scrollWidth,
 			height : $(window).height()
 		};
@@ -116,18 +114,19 @@ function _selectorProperties(mode) {
 	
 function _selectorCanvasProperties(dims, selector_obj, padding, mode) {
 		
-	let focus_outline_width = 10;
+	//thick focus outline width ± 5px;
+	let padding_sum = 10 + (padding * 2);
 	
 	if (mode == 'mobile'){
 		return  {
-			width : canvasDimension(dims, 'width', selector_obj.height - (padding * 2)),
-			height : selector_obj.height - ( (padding * 2) + focus_outline_width)
+			width : canvasDimension(dims, 'width', selector_obj.height - padding_sum),
+			height : selector_obj.height - padding_sum
+
 		};	
 	} else {
 		return   {
-// 			width : selector_obj.width - (padding * 2),
-			width : selector_obj.width - ( (padding * 2) + focus_outline_width ),
-			height : canvasDimension(dims, 'height', selector_obj.width - (padding * 2))
+			width : selector_obj.width - padding_sum,
+			height : canvasDimension(dims, 'height', selector_obj.width - padding_sum)
 		};
 	};
 }
@@ -135,10 +134,10 @@ function _selectorCanvasProperties(dims, selector_obj, padding, mode) {
 function _readFileName(imagepath){
 		
 	//get image dimensions from filename; example 1000x669.jpg
-	var delimeters = imagepath.split('/')
-	var filename = delimeters[4];
-	var src_width = Number( filename.substring(0, filename.indexOf("x") ) );
-	var src_height = Number( filename.substring(filename.indexOf("x") + 1, filename.indexOf(".jpg")) );
+	let delimeters = imagepath.split('/')
+	let filename = delimeters[4];
+	let src_width = Number( filename.substring(0, filename.indexOf("x") ) );
+	let src_height = Number( filename.substring(filename.indexOf("x") + 1, filename.indexOf(".jpg")) );
 		
 	return [src_width,src_height];
 }
@@ -152,23 +151,29 @@ function _activateEvent(clicked, params){
 	
 	if(type != params.targetEl) return;
 	
-	var cid = clicked.id;
-	//affect navigation
-	var prev = document.querySelector('.option.selected');
-	if(prev) removeClass(prev, 'selected');
-	var option = document.getElementById(cid).parentNode;
-	addClass(option, 'selected');
+	{
+		//affect navigation
+		let cid = clicked.id;
+		let prev = document.querySelector('.option.selected');
+		if(prev)
+		removeClass(prev, 'selected');
+		
+		let option = document.getElementById(cid).parentNode;
+		addClass(option, 'selected');
 	
-	// determine id of clicked option from c
-	// i.e. canvas-0-color; canvas-12-color
-	var start = (cid.indexOf('-')) + 1;
-	var end = (cid.lastIndexOf('-'));
-	var cindex = Number(cid.substring(start, end ));	
+		// determine id of clicked option from c
+		// i.e. canvas-0-color; canvas-12-color
+	
+		let start = (cid.indexOf('-')) + 1;
+		let end = (cid.lastIndexOf('-'));
+		var cindex = Number(cid.substring(start, end ));	
+	} 
+	
+		
 	
 	//retrieve data
 	var options = params.data;
 	var selected = (options[cindex]);
-	
 	
 	buildModal(selected, params.mode, params.method);	
 

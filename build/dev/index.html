@@ -2,10 +2,12 @@
 <html class="no-js">
 	<head>
 		<title>New Heritage</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
 		<!--bower:css -->
+		<link rel="stylesheet" href="../../bower_components/normalize-css/normalize.css" />
 		<!--endbower-->
 		<!--inject:css -->
 		<link rel="stylesheet" href="assets/css/style.css">
@@ -25,9 +27,9 @@
 	<nav>
 		<div class="wrapper">
 		<ul id="nav" tabindex="0">
-			<li><a class="projects active" href="#projects" tabindex="-1">Projects</a></li>
-			<li><a class="people" href="#people" tabindex="-1">People</a></li>
-			<li><a class="contact" href="#contact" tabindex="-1">Contact</a></li>
+			<li><a id="projects" href="#" tabindex="-1">Projects</a></li>
+			<li><a id="people" class="active" href="#" tabindex="-1">People</a></li>
+			<li><a id="contact" href="#" tabindex="-1">Contact</a></li>
 		</ul>
 		
 		</div><!--/.wrapper-->
@@ -35,7 +37,6 @@
 	<main>
 		<div class="wrapper">
 			<div class="content projects">
-<!-- 			<h1>Projects</h1> -->
 			<p>The primary mission of New Heritage has two overarching elements. First, the company will continue with and significantly expand its work with true historical structures. This will include protecting and preserving certain properties, while it will involve repurposing and giving new life to other projects.</p>
 <p>We have found there are a number of valuable properties that mean a great deal to their communities and represent a significant portion of what you might call local DNA. However, many of these fine old buildings, and a large number of homes, have outlived their usefulness and are, in fact, in serious violation of their local codes.</p>
 <p>In the first instance, we work to update and restore structures to their original condition, using as many of the original elements as possible. In fact, we have probably the best team of scavengers in existence, and they are responsible for looking at flea markets, salvage yards, and every place imaginable to find just the perfect door knob, window, or fixture to complete a realistic restoration.</p>
@@ -43,38 +44,40 @@
 <p>We are also very excited about our second mission, that of bringing a historic appeal to totally new communities, structures and homes. Depending on your generation, historic means a lot of different things. We have successfully recreated the look and feel of turn of the 20th century downtowns, and we have also been involved in more modern projects, such as restoring a collection of art deco hotels in Miami.</p>
 <p>We are currently in various stages of four different projects that include a downtown for a major new development, two new residential projects, and the total rebuilding of a four-block area of a major metropolitan downtown site.</p>
 			</div>	<!--/.project-->
-			<div class="content people">
-<!-- 			<h1>People...</h1> -->
+			<div class="content people active">
 			<p>First Title Real Estate of Dallas, TX, today announced the formation of New Heritage Realty. This new firm will operate as an independent Limited Liability Company, and is the newly created entity will take over and expand the work of the former Historic Restoration Division of First Title. </p>
 			<blockquote>"We have found the nationwide interest in quality restoration work is rapidly expanding. Additionally, many clients who are familiar with our work have sought out original concepts for new construction that reflects a proud architectural heritage."</blockquote>
 <p>Jim Blacker, CEO of First Title, comments, “We have found the nationwide interest in quality restoration work is rapidly expanding. Additionally, many clients who are familiar with our work have sought out original concepts for new construction that reflects a proud architectural heritage.”</p>
 <p>To respond to this need, we have spun off this division and created a truly world-class management team. In addition to the current staff, which boasts of dozens of successful projects that have won numerous awards, we have added a number of highly recognized experts in several fields of historic restoration. Of course, our many clients and members of the real estate industry will recognize our long-term managers</p>
 			</div>	<!--/.people-->
 			<div class="content contact">
-<!-- 			<h1>Contact</h1> -->
-			<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
-			<form>
+			<p>Please complete all fields below to contact New Heritage Realty by email.</p>
+<!-- 			<blockquote> -->
+			<form method="POST" action="">
 				<p><label for="name">Name</label>
-				<input type="text" id="name"></p>
+				<input type="text" id="name" maxlength="50" required ></p>
 				<p><label for="phone">Phone</label>
-				<input type="tel" id="phone"></p>
-				<p><label for="phone">Email</label>
-				<input type="email" id="email"></p>
-				<p><label for="phone">Select</label>
-				<select id="email"><option>1</option><option>2</option></select>
-				<p><label for="phone">Comment</label>
-				<textarea for="comment" id="comment"></textarea>
+				<input type="tel" id="phone" maxlength="20" required></p>
+				<p><label for="email">Email</label>
+				<input type="email" id="email" maxlength="50" required></p>
+				<p><label for="comment">Comment</label>
+				<textarea id="comment" maxlength="250" rows="5" required></textarea></p>
+				<p><label for="submit">Submit</label>
+				<input type="submit" value="Send"></p>
+			</form>
+<!-- 			<blockquote> -->
 			</div>	<!--/.contact-->
 		</div><!--/.wrapper-->
 	</main>
 	<footer>
 		<div class="wrapper">
-			<p>Footer</p>
+			<p>&copy; 2016 New Heritage Realty</p>
 			</div>
 	</footer>
 	</div><!--/.wrapper-->
 </div><!--/#content-->
 <div id="sidebar"></div>
+
 <!--bower:js-->
 <script src="../../bower_components/jquery/dist/jquery.js"></script>
 <!--endbower-->

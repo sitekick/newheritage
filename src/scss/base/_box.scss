@@ -55,7 +55,7 @@ body.modal & {
 
 header,
 nav,
-main,
+main, 
 footer {
 	
 	> .wrapper{
@@ -139,6 +139,11 @@ main {
 	&.projects,
 	&.contact {
 		display: none;
+	
+	&.active {
+		display: block;
+	}
+	
 	}
 	
 	@include screen-small{
@@ -154,3 +159,11 @@ main {
 }
 }
 
+footer {
+	margin-top: 4em;
+	margin-bottom: 2em;
+	.wrapper{
+		color: $white;
+		padding: .25em;
+	}
+}

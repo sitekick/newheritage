@@ -64,16 +64,18 @@ function grayscaleImg(ctx, width, height) {
     ctx.putImageData(imgData, 0, 0);
 }
 
-function tintImg(ctx, width, height, hex) {
-
-	grayscaleImg(ctx,width,height);
-	        
-	ctx.globalCompositeOperation = 'overlay';
-	ctx.fillStyle = hex;
-	ctx.fillRect(0, 0, width, height);
-			
-	ctx.getImageData(0, 0, width, height);
-        
+function tintImage(ctx, width, height, R, G, B) {
+ 
+  var imgData = ctx.getImageData(0, 0, width, height);
+  var data = imgData.data;
+   
+   for (var i = 0; i < data.length; i += 4) {
+    data[i    ] = R * data[i    ] / 255;
+    data[i + 1] = G * data[i + 1] / 255;
+    data[i + 2] = B * data[i + 2] / 255;
+  	}  
+            
+   ctx.putImageData(imgData, 0, 0);
 }
 
 
@@ -95,7 +97,7 @@ function canvasDimension(src_dimensions, mode, calc_value){
 	// mode: string to determine what to calculate ('width' || 'height')
 	// calc_value: number to use for calculation (width || height)
 	var perc;
-		
+	
 	switch(mode){
 			
 		case 'height' :
@@ -112,27 +114,4 @@ function canvasDimension(src_dimensions, mode, calc_value){
 			return 300;
 			break;
 		}
-}
-
-
-function vignetteCanvas(canvas){
-		
-	//apply sized/cropped background image to modal window
-		
-	var vignetteCanvas = document.createElement('canvas');
-	var vignetteContext = vignetteCanvas.getContext('2d');
-	var modal_offset = $('#modal .wrapper').offset();
-		
-	var border = 4;
-	var offx = modal_offset.left + border;
-	var offy = modal_offset.top + border;
-	var cw = $('#modal').width();
-	var ch = $('#modal').height() ;
-		
-	vignetteCanvas.id = 'vignette';
-	vignetteCanvas.width = cw;
-	vignetteCanvas.height = ch;
-	vignetteContext.drawImage(canvas,offx,offy,cw,ch,border,border,cw-(border*2),ch );
-		
-		$('#modal .wrapper').append(vignetteCanvas);
 }

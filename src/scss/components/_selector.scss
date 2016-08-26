@@ -23,23 +23,26 @@
 
 #selector{
 	background: #FFF;
-// 	position: fixed;
 	position: absolute;
-	top: 0; 
+	top: 0;
+	left: 0; 
 	z-index: 100;
 	overflow-y: scroll;
 	overflow-x: hidden;
+
+
 
 	> .wrapper {
 		margin: 0 10px;
 		position: absolute;
 	
-		@include screen-small{
-			margin: 10px 0;
-			display: flex;
-			position: absolute; 
-			flex-flow: row nowrap;
-		}
+	@include screen-small{
+		margin: 10px 0;
+// 		display: flex;
+		position: absolute; 
+// 		flex-flow: row nowrap;
+		display: table;
+	}
 	}
 	
 	canvas{
@@ -54,9 +57,9 @@
 		
 		.canvas-color{
 			position: absolute;
-			opacity: .35; 
+			opacity: .25; 
 			transition-property: opacity;
-			transition-duration: .35s;
+			transition-duration: .25s;
 
 		}
 	
@@ -69,10 +72,10 @@
 	}	
 	
 	@include screen-small{
-		margin-right: 10px;
+		padding-right: 10px;
+		display: table-cell;
 	}
 	}
-		
 	
 
 @include screen-small{
