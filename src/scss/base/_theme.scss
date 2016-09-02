@@ -4,6 +4,7 @@ html{
 
 
 body {
+	position: relative;
 	background: $grey;
 	color: $white;
 	font-family: $raleway;
@@ -65,6 +66,7 @@ img {
 		max-width: 100%;
 		height: auto;
 	}
+	
 	.logo &{
 		margin-top: .25em;	
 		margin-bottom: .5em;	
@@ -118,6 +120,11 @@ label {
 &[for="phone"]{
 // 	border: 1px solid red;
 }
+@include screen-small{
+	display: block;
+	width: auto;
+	text-indent: 0;
+}
 }
 
 input {
@@ -130,12 +137,32 @@ input {
 	color: $white;
 }
 
+&[type="submit"]{
+	padding: .25em 1em;
+	cursor: pointer;
+	background: $white;
+	border: 0;
+
+&:hover{
+	background: $orange;
+	color: $white;
+}
+}
+
+
 
 &[type="text"],
 &[type="tel"],
 &[type="email"]{
 	width: 250px;
 	padding: .25em;
+
+@include screen-small{
+	width: 95%;
+	padding: .25em 0;
+	text-indent: .5em;
+}
+
 }
 
 }
@@ -150,5 +177,10 @@ textarea{
 &:focus{
 	background: $orange;
 	color: $white;
+}
+
+
+@include screen-small{
+	width:95%;
 }
 }

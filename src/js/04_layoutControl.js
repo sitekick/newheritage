@@ -45,9 +45,7 @@ var layoutControl = (function (state) {
 					if(this.scrollTop > 0);
 						this.scrollTop = 0;
 				},
-				select : function () {
-					
-				}
+				select : null		
 			}
 	};
 	
@@ -81,7 +79,6 @@ var layoutControl = (function (state) {
 				buildSelector(data, mode);
 			}
 				
-			
 			_switcher('select');
 		};
 		

@@ -58,8 +58,35 @@ function buildSelector(options, mode) {
 	for (var _i = 0; _i < focus_options.length; _i++) {
 
 		focus_options[_i].addEventListener('keydown', function (e) {
-			//space key for buttons;
-			if (e.key == ' ' || e.key == 'Enter') {
+
+			var handle = false;
+			if (e.key !== undefined) {
+
+				switch (e.key) {
+					case ' ':
+					case 'Spacebar':
+					case 'Enter':
+						handle = true;
+						break;
+					default:
+						return;
+				}
+			} else if (e.keyCode !== undefined) {
+
+				switch (e.keyCode) {
+					case '32':
+					case '13':
+						handle = true;
+						break;
+					default:
+						return;
+				}
+			} else {
+				return;
+			} // if()
+
+			if (handle === true) {
+				//do this
 				var target = this.querySelector('.canvas-color');
 				var params = {
 					targetEl: 'canvas',

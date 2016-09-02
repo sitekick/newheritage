@@ -31,7 +31,7 @@ var keyFocus = function keyFocus(id, clickEvent) {
 
 			this.focusable[i].addEventListener('keydown', function (e) {
 
-				return thisObj.childFocus2(e, this);
+				return thisObj.childFocus(e, this);
 			}, true);
 		};
 	};
@@ -53,7 +53,7 @@ var keyFocus = function keyFocus(id, clickEvent) {
 		}, false);
 	};
 
-	FocusGroup.prototype.childFocus2 = function (e, el) {
+	FocusGroup.prototype.childFocus = function (e, el) {
 
 		if (e.defaultPrevented) {
 			return; // Should do nothing if the default action has been cancelled

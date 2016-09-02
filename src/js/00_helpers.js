@@ -20,3 +20,20 @@ function removeClass(el, className) {
     el.className=el.className.replace(reg, ' ')
   }
 }
+
+
+function rewriteExtension(path, fromExt, toExt){
+	
+		let pos = path.indexOf(fromExt);
+		
+		if(pos > -1) {
+			return (path.slice(0,pos) + toExt);
+		} else {
+			return false;
+		}
+}
+
+
+		
+		
+		

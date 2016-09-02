@@ -46,7 +46,15 @@ function _desktopImage(srcImagePath) {
 	srcImage.onload = function () {
 		drawImageProp(backCtx, srcImage, 0, 0, vw, vh);
 		$('body').prepend(backCanvas);
-		vignetteImage(backCanvas);
+
+		if (bowser.name == 'Safari' && bowser.version == '5.1') {
+			//safari 5.1
+			var replica = canvasClone(backCanvas);
+			vignetteImage(replica);
+		} else {
+			vignetteImage(backCanvas);
+		};
+
 		tintImage(backCtx, vw, vh, 239, 65, 54);
 	};
 
@@ -60,7 +68,7 @@ function vignetteImage(canvas) {
 	var vignetteCanvas = document.createElement('canvas');
 	var vignetteContext = vignetteCanvas.getContext('2d');
 	var modal_offset = $('#modal .wrapper').offset();
-
+	//console.log(modal_offset);
 	var offx = modal_offset.left;
 	var offy = modal_offset.top;
 	var cw = $('#modal').width();
@@ -69,6 +77,7 @@ function vignetteImage(canvas) {
 	vignetteCanvas.id = 'vignette';
 	vignetteCanvas.width = cw;
 	vignetteCanvas.height = ch;
+	//console.log(offx+':'+offy+':'+cw+':'+ch+':'+0+':'+0+':'+cw+':'+ch);
 	vignetteContext.drawImage(canvas, offx, offy, cw, ch, 0, 0, cw, ch);
 	$('#modal .wrapper').append(vignetteCanvas);
 }
@@ -114,6 +123,8 @@ function _modalEvents(mode, method) {
 
 	var modal = document.getElementById('modal');
 	var button = modal.querySelector('.controls');
+
+	var a11y_modal = keyFocus('#modal');
 
 	button.addEventListener('keydown', function (e) {
 		if (e.key == ' ' || e.key == 'Enter') {

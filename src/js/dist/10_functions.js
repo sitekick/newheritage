@@ -1,12 +1,11 @@
 'use strict';
 
-/* 10_functions.js */
+/* 10_functions.js : document ready */
 $(function () {
 	/* active: active main navigation
  	selected: selected item 
  */
 	var active, appdata, resizeid, selected, viewport, contentScroll;
-	//var active = 'people';
 
 	var events = {
 		'(max-width: 768px)': function maxWidth768px() {
@@ -31,34 +30,29 @@ $(function () {
 	//with true to set initial state
 	resizeQuery(events, true);
 
+	$.getJSON('assets/data/data.json').done(function (data) {
+		appdata = data;
+		// initial page
+		firstPage();
+	}).fail(function () {
+		console.log('error');
+	});
+
 	/*
- 	$.getJSON('assets/data/data.json')
- 		.done(function(data) {
- 			
+ 	$.ajax({
+ 		url: 'assets/data/data.json',
+ 		cache: false,
+ 		dataType: 'json',
+ 		success: function(data) {
  			appdata = data;
  			// initial page
- 			let default_nav = document.querySelector('nav a.' + active);
- 			console.log(default_nav);
- 			default_nav.click();
-   		})
-   		.fail(function() {
-   			console.log('error');
-   		});
+ 			firstPage();
+   		},
+   		error: function (request, status, error) { 
+ 	  		console.log('data error'); 
+ 	  	}
+ 	});
  */
-
-	$.ajax({
-		url: 'assets/data/data.json',
-		cache: false,
-		dataType: 'json',
-		success: function success(data) {
-			appdata = data;
-			// initial page
-			firstPage();
-		},
-		error: function error(request, status, _error) {
-			console.log('data error');
-		}
-	});
 
 	var nav = document.querySelectorAll('nav a');
 

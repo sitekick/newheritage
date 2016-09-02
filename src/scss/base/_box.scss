@@ -11,7 +11,6 @@
 		position: relative;
 		direction: ltr;
 		z-index:10;
-		
 	}	
 
 body.modal & {
@@ -19,6 +18,10 @@ body.modal & {
 	/* overflow -> hidden has resize bug */
 	margin-left: -20px;
 	padding-left: 20px;
+
+@include ua( sf5-1 sf6 sf6-1 sf6-2){
+	overflow: hidden;
+}
 }
 
 
@@ -71,17 +74,10 @@ header {
 	margin-bottom: 0;
 	
 	> .wrapper{
-// 		display: table;
 		
 		div {
-// 			display: table-cell;
 			
 			&.logo{
-// 			height: 125px;
-/*
-			margin-top: .75em;	
-			margin-bottom: 1em;
-*/
 			
 			@include screen-full{
 				margin-right: 20em;
@@ -89,29 +85,10 @@ header {
 			@include screen-large{
 				margin-right: 10em;
 			}
-			@include screen-medium{
-// 				margin-right: 8em;
-			}
 			@include screen-small{
 				margin-right:0;
 			}
 			}
-			
-/*
-			&.dropdown{
-				text-align: left;
-				width: 35%;
-			
-			@include screen-small{
-				position: relative; 
-			}
-			}
-*/
-		
-		@include screen-small{
-// 			display: block;
-// 			width: 100%;
-		}
 		}
 	
 	}

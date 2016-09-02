@@ -1,10 +1,9 @@
-/* 10_functions.js */
+/* 10_functions.js : document ready */
 $(function () {
 	/* active: active main navigation
 		selected: selected item 
 	*/
 	var active, appdata, resizeid, selected, viewport, contentScroll;
-	//var active = 'people';
 	
 	var events = {
 			'(max-width: 768px)' : function() { 
@@ -32,23 +31,17 @@ $(function () {
 	//with true to set initial state
 	resizeQuery(events, true);
 	
-	
-	
-/*
 	$.getJSON('assets/data/data.json')
 		.done(function(data) {
-			
 			appdata = data;
 			// initial page
-			let default_nav = document.querySelector('nav a.' + active);
-			console.log(default_nav);
-			default_nav.click();
+			firstPage();
   		})
   		.fail(function() {
   			console.log('error');
   		});
-*/
 	
+/*
 	$.ajax({
 		url: 'assets/data/data.json',
 		cache: false,
@@ -62,6 +55,7 @@ $(function () {
 	  		console.log('data error'); 
 	  	}
 	});
+*/
 	
 	var nav = document.querySelectorAll('nav a');
 	
@@ -147,5 +141,6 @@ $(function () {
 				addClass(body, 'tabstyles');
 		}
 	}, false);
+	
 	
 });

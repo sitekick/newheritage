@@ -57,17 +57,46 @@ function buildSelector(options, mode){
 	for(let i=0; i < focus_options.length; i++){
 			
 			focus_options[i].addEventListener('keydown', function (e){
-				 //space key for buttons;
-				 if(e.key == ' ' || e.key == 'Enter'){
-				 	let target = this.querySelector('.canvas-color')
-				 	let params = {
+				 
+				 var handle = false;
+				 if (e.key !== undefined) {
+					 
+					switch(e.key){
+					 	case ' ' :
+					 	case 'Spacebar' :
+					 	case 'Enter' :
+					 		handle = true;
+				 		break;
+				 		default : 
+				 			return;
+				 	}
+					 
+				 } else if(e.keyCode !== undefined){
+					 
+					 switch(e.keyCode){
+					 	case '32' :
+					 	case '13' :
+					 		handle = true;
+				 		break;
+				 		default : 
+				 			return;
+				 	}
+				 } else {
+					return;
+				 }// if()
+				 
+				  if(handle === true) {
+					  //do this
+					let target = this.querySelector('.canvas-color')
+					let params = {
 					 	targetEl : 'canvas',
 					 	data : options,
 					 	mode : mode,
 					 	method: 'tabbed'
 				 	}
-				 	_activateEvent(target, params);
-				 	}
+				 	_activateEvent(target, params);	
+				 }
+				 	
 				}, true);
 				
 			focus_options[i].addEventListener('mouseup', function (e){

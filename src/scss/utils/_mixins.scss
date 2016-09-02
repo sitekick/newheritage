@@ -25,3 +25,12 @@
     @content;
   }
 }
+
+@mixin ua($agents) {
+    @each $agent in $agents { 
+
+		html.#{$agent} & {
+            @content;
+         }
+    }
+}

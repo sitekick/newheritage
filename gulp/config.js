@@ -1,47 +1,118 @@
-var src		=	'./src/',
-	dist	= 	'./build/',
-	dev		= 	'dev/',
-	prod	=	'prod/';
+/*
+var src				= './src/',
+	dist			= './build/',
+	dev 			= 'dev/',
+	prod			= 'prod/';
+*/
 	
-	
+
 module.exports = {
-	data :  {
-		src : [src + 'data/*.json','!' + src + 'data/arch','!' + src + 'data/arch/**/*'],
-		dest : dist + dev + 'assets/data'
-	},
-	images :  {
-		src : [src + 'img/**/*', '!' + src + 'img/arch','!' + src + 'img/arch/**/*'],
-		dest : dist + dev + 'assets/img'
-	},
-	scripts : {
-		dest : dist + dev + 'assets/js',
-		src: {
-			build : [src + 'js/vendor/*.js',src + 'js/*.js', '!' + src + 'js/arch','!' + src + 'js/arch/**/*'],
-			test : [src + 'js/vendor/*.js', src + 'js/dist/*.js']
-			}
-	},
-	sass : {
-		src : src + 'scss/**/*.scss',
-		dest : dist + dev + 'assets/css',
-		options : {
-			noCache : true,
-			compass : false,
-			bundleExec : false,
-			sourcemap : true,
-			style : 'expanded'
-		},
-		autoprefixer : {
-			browsers: ['last 2 versions','safari 5.1','ie 9','opera 12.1','ios 6','android 4'],
-			cascade: true
+	delete: {
+		dest: {
+			dev : './build/dev/assets',
+			prod : './build/prod/assets'
 		}
 	},
-	wiredep : {
-		src : dist + dev,
-		index : 'index.html'
+	html : {
+		src : './src/templates/*.html',
+		dest : {
+			dev : './build/dev',
+			prod : './build/prod'
+		}
+	},
+	scripts : {
+		dest : {
+			dev : './build/dev/assets/js',
+			prod : './build/prod/assets/js'
+		},
+		src: {
+			dev : [
+				'./src/js/vendor/*.js',
+				'./src/js/*.js', 
+				'!./src/js/arch',
+				'!./src/js/arch/**/*'
+				],
+			dist : [
+				'./src/js/vendor/*.js', 
+				'./src/js/dist/*.js'
+				],
+			prod : [
+				'./src/js/vendor/*.js',
+				'./src/js/dist/*.js'
+				]
+		}
 	},
 	babel : {
-		src:  src + 'js/*.js',
-		dest: src + 'js/dist'
+		src:  './src/js/*.js',
+		dest: './src/js/dist'
+	},
+	images: {
+		src:  [
+			'./src/img/*',
+			'./src/img/**/*',
+			'!./src/img/arch',
+			'!./src/img/arch/**/*'
+			],
+		dest: {
+			dev : './build/dev/assets/img',
+			prod : './build/prod/assets/img'
+		}
+	},
+	data: {
+		src:  './src/data/*.json',
+		dest: {
+			dev : './build/dev/assets/data',
+			prod : './build/prod/assets/data'
+		}
+	},
+	sass: {
+		src:  './src/scss/**/*.scss',
+		dest: { 
+			dev : './build/dev/assets/css',
+			prod : './build/prod/assets/css'
+		},
+		options: {
+			dev : {
+				noCache: true,
+				compass: false,
+				bundleExec: false,
+				sourcemap: true,
+				style: 'expanded'
+  			},
+  			prod : {
+				noCache: true,
+				compass: false,
+				bundleExec: false,
+				sourcemap: false,
+				style: 'compressed'
+  			}
+		}
+	},
+	autoprefixer: {
+		browsers: [
+			'last 2 versions',
+			'Firefox >= 20',
+			'Safari >= 5.1',
+			'ie >= 9',
+			'Edge >= 12',
+			'Opera >= 12.1',
+			'iOS 6',
+			'Android 4'
+		],
+		cascade: true
+	},
+	bower:{
+		src: {
+			dev : './build/dev',
+			prod : './build/prod'
+		},
+		index: '/index.html'
+	},
+	server : {
+		url : 'newheritage.imac',
+		build : {
+			dev : '/build/dev',
+			prod : '/build/prod'
+		}
 	}
 };
-

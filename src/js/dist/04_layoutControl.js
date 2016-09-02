@@ -47,7 +47,7 @@ var layoutControl = function (state) {
 				if (this.scrollTop > 0) ;
 				this.scrollTop = 0;
 			},
-			select: function select() {}
+			select: null
 		}
 	};
 
